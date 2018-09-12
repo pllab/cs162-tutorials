@@ -4,9 +4,9 @@
 
 > **Note:** Segments formatted this way offer helpful advice and hints. Be sure to pay attention to them.
 
-The goal of these tutorials is to give you an experience of how to think about, test and structure Scala code. They will introduce and explain most of the features commonly used by Scala developers and act as a backup stash of examples if ever stuck with any future course projects.
+The goal of these tutorials is to give you an experience of how to think about, test and structure Scala code. They will introduce and explain most of the features commonly used by Scala developers and act as a backup stash of examples if ever stuck with any future projects.
 
-For this introductory tutorial, we will be looking at a program that simply prints a message to the screen using Scala. You will learn about `Scala` as a language, and how to use `SBT`, Scala's build tool, to make your life easier. You will be using this setup for the rest of the course, so be sure to understand it and be comfortable with it.
+For this introductory tutorial, we will be looking at a program that simply prints a message to the screen using Scala. You will learn about `Scala` as a language, and how to use `SBT`, Scala's build tool, to make your life easier. You will be using this setup for any project you do, so be sure to understand it and be comfortable with it.
 
 > All of the tutorials have accompanying Scala files that you can change and play with. Some of them are used by more than one tutorial. The name of the file will always be listed in a comment at the beginning of any code listing associated with it.
 
@@ -142,9 +142,9 @@ object Main {
     println("Hello World!")
 }
 ```
-Let's go through this code line by line: the first line declares that the contents of the `Main.scala` file are part of the `cs162.tutorials.helloworld` package. `object Main` declares that an object exists (just a singleton object called main), and then within this object we have a method called `main`. This is the equivalent to the `main` function from C or Java.
+Let's go through this code line by line: the first line declares that the contents of the `Main.scala` file are part of the `cs162.tutorials.helloworld` package. `object Main` declares that an object exists (just a singleton object called main), and then within this object we have a method called `main`. This is the equivalent to the `main` function from C or Java, which acts as an entrypoint when running the program.
 
-Let's take a closer look at the type of this method: `def main(args: Array[String]): Unit` means that it takes a single argument of type `Array[String]` (read "array of strings") called `args`, and returns a `Unit` value. For now, you can imagine `Unit` as `void` from C or Java. We will come back to explain the difference in a [later tutorial](#). As in those other languages, the main entrypoint of the program _must_ have this exact type for the program to work. SBT will recognize the entrypoint method by name and type alone.
+Let's take a closer look at the type of this method: `def main(args: Array[String]): Unit` means that it takes a single argument of type `Array[String]` (read "array of strings") called `args`, and returns a `Unit` value. For now, you can imagine `Unit` as `void` from C or Java. We will come back to explain the difference in a [later tutorial](#). As in those other languages, the main entrypoint of the program _must_ have this exact type for the program to execute. SBT will recognize the entrypoint method by name and type alone.
 
 Being a functional language, every function and method is defined by what it does, and is equal to that process. That's why we can write that the `main` method is _equal_ to a call to `println("Hello World!")`: it does exactly that and nothing else.
 
@@ -156,6 +156,8 @@ Being a functional language, every function and method is defined by what it doe
  }
 ```
 > It is worth remembering that even though this _looks_ like what you might be used to coming from C/C++, the meaning is slightly different and will be explored in a [later tutorial](#).
+
+# Scala Interpreter Console
 
 We can see how this method works from the console as well. By typing `console` into the SBT shell, we get the following:
 ```sbt
@@ -172,7 +174,7 @@ Type :help for more information.
 
 scala> 
 ```
-This is yet another console, this time one in Scala. From here, we can call any Scala code directly, so we could try out any expression:
+This is yet another console, this time one for using Scala as an interpreter. You can try out snippets of Scala code here, before deciding to include them in your code for good. From here, we can call any Scala code directly, so we could try out any expression:
 
 ```sbt
 scala> 3+3
@@ -180,9 +182,8 @@ res0: Int = 6
 
 scala> 
 ```
-We can see that the console is useful for determining not only the resulting value, but also the type of a value (`6` indeed is an `Int`).
+We can also try a `println` statement or a method call, such as `Main.main`. Don't be intimidated while in the console, you can try out things here with no reprecussions until they get to work.
 
-We can also try a `println` statement or a method call, such as `Main.main`. Don't be intimidated while in the console, you can try out things here.
 ```sbt
 scala> Main.main
 <console>:11: error: missing arguments for method main in object Main;
@@ -192,8 +193,7 @@ follow this method with `_' if you want to treat it as a partially applied funct
 
 scala>
 ```
-We need to pass actual arguments, and in this case it needs to be an array of strings. Passing an empty array will work:
-
+Reading the error messages is instrumental to understanding a language. Scala tries to give informative error messages, sometimes even going above and beyond the call of duty to give suggestions. We need to pass actual arguments, and in this case it needs to be an array of strings (as we know from the code). Passing an empty array will work, and in Scala this can be written as:
 ```sbt
 scala> Main.main(Array())
 Hello World!
@@ -201,7 +201,7 @@ Hello World!
 scala> 
 ```
 
-We can return from this Scala interpreter console to the SBT one by `CTRL+D`.
+We can return from this Scala interpreter console to the SBT one by pressing `CTRL+D`.
 
 ```sbt
 scala>      <user hits CTRL+D> 
@@ -210,4 +210,4 @@ sbt:helloworld> exit
 [info] shutting down server
 ```
 
-This concludes our first tutorial on Scala, where the main point was getting used to the environment and seeing the basic usecase of SBT in Scala development.
+This concludes our first tutorial on Scala, where the main point was getting used to the environment and seeing the basic usecase of SBT in Scala development. Feel free to return to this at any point when you're feeling unsure of how to work in the Scala development environment.

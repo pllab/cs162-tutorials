@@ -111,9 +111,11 @@ sbt:helloworld> test
 [success] Total time: 1 s, completed Sep 12, 2018 1:58:41 AM
 sbt:helloworld> 
 ```
+The tests include only an empty test suite for this project, so we won't go deeper into that topic right now.
+
 ```sbt
 sbt:helloworld> compile
-[success] Total time: 1 s, completed Sep 12, 2018 2:03:02 AM
+[success] Total time: 1 s, completed Sep 12, 2018 1:58:59 AM
 sbt:helloworld> 
 ```
 ```sbt

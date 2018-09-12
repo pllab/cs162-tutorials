@@ -198,6 +198,14 @@ Hello World!
 
 scala> 
 ```
+
 We can return from this Scala interpreter console to the SBT one by `CTRL+D`.
+
+```sbt
+scala>      <user hits CTRL+D> 
+[success] Total time: 5032 s, completed Sep 12, 2018 2:27:04 AM
+sbt:helloworld> exit
+[info] shutting down server
+```
 
 This concludes our first tutorial on Scala, where the main point was getting used to the environment and seeing the basic usecase of SBT in Scala development.

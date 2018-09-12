@@ -29,15 +29,15 @@ To use Scala in a productive manner, the use of SBT (Scala Build Tool) is encour
 To get started, we can create a minimal Scala project by running:
 
 ```bash
-> sbt new fayimora/basic-scala-project.g8
+> sbt new pllab/scala.g8
 ```
 
-> The command `sbt new` makes a new project out of a template, in this case, a basic scala project template at the `fayimora/basic-scala-project.g8` URL. The only reason we're using this specific template is because it very closely matches the very basic setup that is needed for this class.
+> The command `sbt new` makes a new project out of a template, in this case, a basic scala project template at the `pllab/scala.g8` URL. This specific template is used as it holds exactly the things we will need for this tutorial. Other tutorials might be 
 
 The template requires some details to be added, which you will do accordingly:
 
 ```bash
-> sbt new fayimora/basic-scala-project.g8
+> sbt new pllab/scala.g8
 A basic scala project 
 
 name [Basic Project]: <input project name here>

@@ -213,3 +213,8 @@ sbt:helloworld> exit
 ```
 
 This concludes our first tutorial on Scala, where the main point was getting used to the environment and seeing the basic usecase of SBT in Scala development. Feel free to return to this at any point when you're feeling unsure of how to work in the Scala development environment.
+
+## Exercises
+
+1. What output do you get if you follow the suggestion given by SBT when trying to execute `Main.main` without arguments in the interpreter console?
+

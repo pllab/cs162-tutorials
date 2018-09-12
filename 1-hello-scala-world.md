@@ -189,6 +189,8 @@ scala> Main.main
 follow this method with `_' if you want to treat it as a partially applied function
               Main.main
                    ^
+
+scala>
 ```
 We need to pass actual arguments, and in this case it needs to be an array of strings. Passing an empty array will work:
 

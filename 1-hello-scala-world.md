@@ -32,7 +32,7 @@ To get started, we can create a minimal Scala project by running:
 > sbt new pllab/scala.g8
 ```
 
-> The command `sbt new` makes a new project out of a template, in this case, a basic scala project template at the `pllab/scala.g8` URL. This specific template is used as it holds exactly the things we will need for this tutorial. Other tutorials might be 
+> The command `sbt new` makes a new project out of a template, in this case, a basic scala project template at the `pllab/scala.g8` URL. This specific template is used as it has exactly the things we will need for this tutorial. Other templates can be found online and might include specific packages needed for web development, distributed systems, machine learning, etc.
 
 The template requires some details to be added, which you will do accordingly:
 

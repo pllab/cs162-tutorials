@@ -113,8 +113,6 @@ scala>
 ```
 > In practice, people often use this feature when they want their method call to look more like a feature of the language. For instance, to check whether a set contains an element, instead of writing `set.contains(element)` we can just say `set contains element`. Scala tries it's best to be concise and comfortable at every turn.
 
-## Simple Type Checking
-
 Types are a mechanism to stop silly mistakes from happening. For one, even dynamically-typed languages (that have types but check them at runtime) often have the following problem:
 
 ```scala

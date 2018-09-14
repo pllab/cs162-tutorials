@@ -1,11 +1,9 @@
-# A Scala Primer
 
-Scala is a complex, versatile high-level language. The basics of Scala, however, are easy to grasp. As [previously](#) stated, Scala is an object-oriented and functional language. We're going to delve into these topics and show how these paradigms are complementary to each other and offer great scalability together: functional programming gives us a way to easily combine simple parts into more complex ones, and object-oriented programming gives a way to structure these hierarchically. This tutorial will teach you about the following topics:
+# Simple Object-Oriented Programming
 
-- objects and classes,
-- fields and methods.
+Scala is a complex, versatile high-level language. The basics of Scala, however, are easy to grasp. As previously stated, Scala is an object-oriented and functional language. We're going to delve into these topics and show how these paradigms are complementary to each other and offer great scalability together: functional programming gives us a way to easily combine simple parts into more complex ones, and object-oriented programming gives a way to structure these hierarchically. To try any of these features out, you can use SBT's `console` feature (how to get to it is explained in [tutorial 1](#)).
 
-Some topics (such as Scala syntax and type checking) will be explained along the way. To try any of these features out, you can use SBT's `console` feature (how to get to it is explained in [tutorial 1](#)).
+For this tutorial, it is advised you make a new project, following the same process as outlined in the previous tutorial. Call this project `community`, as our running example will involve interpersonal relations between people.
 
 ## Objects and Classes
 
@@ -57,7 +55,8 @@ Now that we have our `Person` class, we can create objects of that class by inst
 
 ```sbt
 scala> val rob = new Person("Hello world")
-rob: cs162.tutorials.helloworld.Person = cs162.tutorials.helloworld.Person@733c2ad7
+rob: cs162.tutorials.helloworld.Person =
+  cs162.tutorials.helloworld.Person@733c2ad7
 
 scala>
 ```
@@ -78,7 +77,7 @@ scala>
 ```
 > Again, Scala can make things shorter! When a method doesn't have arguments, you can omit the parentheses completely and basically just call `rob.talk`. This makes it indistinguishable from a field from the outside, which is okay, as we're aiming for completely transparent code anyway, with no internal changes.
 
-### Exercise
+### Exercises
 
 1. Create `alex`, a friend of `rob`'s, who will say "Hello!". Test out whether `alex` can talk in the Scala console.
 1. Create `sally`, a friend of `rob`'s and `alex`'s, who will say "Hi you two!". Test out whether `sally` can talk in the Scala console, too.
@@ -89,7 +88,7 @@ scala>
 As stated before, being a **pure** object-oriented language, everything in Scala is an object. Does this means that even numbers are objects then? Yes! Let's look at an example already briefly mentioned in the previous tutorial:
 
 ```scala
-scala> 3+4
+scala> 3 + 4
 res0: Int = 7
 
 scala>
@@ -104,11 +103,76 @@ scala>
 ```
 This means that `3` is an object, the method name is `+` and `4` is the argument. If you try to apply this to our talking friends, we see it works albeit with a brief warning:
 
-```scala
+```
 scala> rob talk
-warning: there was one feature warning; re-run with -feature for details
+warning: there was one feature warning; 
+  re-run with -feature for details
 Hello world
 
 scala>
 ```
-> In practice, people often use this feature when they want their method call to look more like a feature of the language. For instance, to check whether a set contains an element, instead of writing `set.contains(element)` we can just say `set contains element`. Scala tries it's best to be concise at every turn.
+> In practice, people often use this feature when they want their method call to look more like a feature of the language. For instance, to check whether a set contains an element, instead of writing `set.contains(element)` we can just say `set contains element`. Scala tries it's best to be concise and comfortable at every turn.
+
+## Simple Type Checking
+
+Types are a mechanism to stop silly mistakes from happening. For one, even dynamically-typed languages (that have types but check them at runtime) often have the following problem:
+
+```scala
+val radius = getRadius();    // returns Int, e.g. 34
+val userInput = getInput();  // returns a String containing 
+							 // a number, e.g. "22"
+val newRadius = 
+  radius + userInput;		 // output: 3422, obviously very wrong!
+```
+It would be nice to have a system that would warn us that `radius` and `userInput` aren't compatible, even though both have a `+` operation.
+
+Types are exactly this system. For example, if we want the `newRadius` to be an integer in the end, we could simply annotate this: 
+```scala
+val radius = getRadius()		// getRadius(): Int = 34
+val userInput = getInput() 		// getInput(): String = "22"
+val newRadius: Int = 			// we annotate the value with
+								// the expected type
+  radius + userInput
+
+<console>:13: error: type mismatch;
+ found   : String
+ required: Int
+       var newRadius: Int = radius + userInput
+								   ^
+```
+You can see that we didn't annotate `radius` and `userInput` when defining them. Scala can infer types in most situations and doesn't require you to put the annotations in yourself, but this process could be wrong. For example, had we _not_ annotated `newRadius: Int`, the inferred type would be `String`, and the value "3422". Using proper types will significantly decrease the number of awkward, buggy situations your code exhibits. 
+
+Scala contains a number of built-in types that one might expect in a modern language, such as `Int`, `Byte`, `Float`, `Char`, `String`, `Array`, etc. New types can be defined using classes. For example, the `Person` class we defined above defined a new type that you can now use in your code. We can write a method `talkTo` as a part of `Person`:
+
+```scala
+class Person(message: String) {
+  def talk = println(message)
+
+  def talkWith(other: Person): Unit = {
+	talk() 
+    other.talk()
+  }
+}
+```
+> We can call methods concerning an object within itself by either calling it by name (so, just `talk()` in this case) or by using the special object `this`, and writing `this.talk()`)
+
+
+### Exercises
+
+4. How would you make `rob` and `sally` talk, and what would that conversation look like? Try it out in the Scala console.
+5. Add a `name` field to the Person class (you decide on the appropriate type), so that we can change the `talkWith` method to do the following:
+```scala
+  def talkWith(other: Person): Unit = {
+    println(this.name + ": " + this.message)
+    println(other.name + ": " + other.message)
+  }
+```
+> Strings in Scala can be _interpolated_ by using `s""` instead of just quotes, and blocking values into `${}` parts, so the above line can be rewritten as:
+```scala
+  println(s"${this.name}: ${this.message}")
+```
+6. Make a new community of people in the Scala console and see if they can talk with each other so that the output looks exactly like this:
+```
+Grievous: General Kenobi!
+Obi: Hello there!
+```

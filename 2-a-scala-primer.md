@@ -120,18 +120,18 @@ Types are a mechanism to stop silly mistakes from happening. For one, even dynam
 ```scala
 val radius = getRadius();    // returns Int, e.g. 34
 val userInput = getInput();  // returns a String containing 
-							 // a number, e.g. "22"
+                             // a number, e.g. "22"
 val newRadius = 
-  radius + userInput;		 // output: 3422, obviously very wrong!
+  radius + userInput;        // output: 3422, obviously very wrong!
 ```
 It would be nice to have a system that would warn us that `radius` and `userInput` aren't compatible, even though both have a `+` operation.
 
 Types are exactly this system. For example, if we want the `newRadius` to be an integer in the end, we could simply annotate this: 
 ```scala
-val radius = getRadius()		// getRadius(): Int = 34
-val userInput = getInput() 		// getInput(): String = "22"
-val newRadius: Int = 			// we annotate the value with
-								// the expected type
+val radius = getRadius()     // getRadius(): Int = 34
+val userInput = getInput()   // getInput(): String = "22"
+val newRadius: Int =         // we annotate the value with
+                             // the expected type
   radius + userInput
 
 <console>:13: error: type mismatch;
@@ -171,7 +171,7 @@ class Person(message: String) {
 ```scala
   println(s"${this.name}: ${this.message}")
 ```
-6. Make a new community of people in the Scala console and see if they can talk with each other so that the output looks exactly like this:
+6. Make some new instances of the `Person` class in the Scala console and see if they can talk with each other so that the output looks exactly like this:
 ```
 Grievous: General Kenobi!
 Obi: Hello there!

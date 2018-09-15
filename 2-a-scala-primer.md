@@ -147,7 +147,7 @@ class Person(message: String) {
   def talk = println(message)
 
   def talkWith(other: Person): Unit = {
-	talk() 
+    talk() 
     other.talk()
   }
 }

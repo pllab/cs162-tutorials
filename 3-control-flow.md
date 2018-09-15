@@ -1,3 +1,4 @@
+
 # Control Flow, Part 1
 
 Scala has a small set of powerful control flow mechanisms that mostly are similar to constructs known from other languages: `if`, `while`, `match`, `for` and `try`. Scala focuses on defining high-level control structures through libraries while leaving its core language minimal, yet sufficient. We will discuss the first three now, and leave `for` and `try` for a later tutorial.
@@ -96,7 +97,68 @@ point match {
 ```
 > Notice the use of `_` whenever we don't care about some value. We could have put a variable name as well, but if we won't use it, there's no need to introduce it.
 
-Additional conditions can be introduced into cases, via the `if` guard. A guarded case looks like this, for example:
+Additional conditions can be introduced into cases, via an `if` guard. A guarded case looks like this, for example:
 ```scala
   case Point(n, 0) if n > 100 => println("On y axis, but far from the beginning!")
 ```
+This is a more succinct way of writing:
+```scala
+  case Point(n, 0) => 
+    if(n > 100) {
+      println("On y axis, but far from the beginning!")
+    }
+```
+Pattern matching is total, meaning that all options have to be explored, otherwise a `MatchError` is thrown. This means that you have two choices:
+
+- you add a _default_ case to the match, that will catch any and all remaining possibilities
+```scala
+  case _ => println("Something happens")
+```
+- you create a _limited number of options_ and explore all of them. This requires us to introduce a new concept, called `trait`s.
+
+### Traits and Enumerations
+A `trait` is an abstraction of a class. It defines what the class will look like and in what ways it can be used. Traits are similar to Java's interfaces in that way. However, even an empty trait can be useful as a tool for bunching case classes together:
+```scala
+trait Shape
+case class Point(x: Int, y: Int) extends Shape
+case class Line(a: Point, b: Point) extends Shape
+```
+By using the `extends` keyword, we made sure that the case classes `Point` and `Line` _are_ `Shape`s. If we were to match on a shape variable, the options become obvious and finite, and include everything that extends from `Shape`. To guarantee that no one can extend `Shape` later, we can use the `sealed` keyword like this:
+```scala
+sealed trait Shape
+```
+The `sealed` keyword allows for `Shape` to be extended only in the same file where it is defined, in turn allowing you to idiomatically limit how many options are possible when matching this trait. We can now say that when matching `Shape`, the only two options to match against (excluding further constraints via `if` guards and special interesting values) are `Point` and `Line`.
+
+### Exercise Project: Calculator
+
+Open the **calculator** project folder and set up your development environment in it. 
+- Open an SBT console in that folder; 
+- Check that the code compiles by executing `compile` in the console;
+- Open your editor of choice in that folder
+
+The project should compile, but contains many missing implementations that you will fill in. In this project, we'll build a simple calculator, able to evaluate arithmetic expressions like `1+3` to `4`. It will recognize additions, subtractions and multiplications over integers. For this purpose, we supply you with the following structure:
+
+```scala
+sealed trait Expr
+case class Num(value: Int) extends Expr
+case class Add(lhs: Expr, rhs: Expr) extends Expr
+case class Sub(lhs: Expr, rhs: Expr) extends Expr
+case class Mul(lhs: Expr, rhs: Expr) extends Expr
+```
+As you can see, the parameters of all binary operations (`+`, `-` and `*`) are expressions, which means that we can now nest these case classes like so:
+```scala
+Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
+```
+1. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `Evaluation` tests pass, you're done! The `evaluate` method has the following signature:
+```scala
+  def evaluate(tree: Expr): Int = ???
+```
+2. In a similar way as with `evaluate`, write a `showAsMath` method that prints every `Expr` in its mathematical form. For example, `showAsMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `Show As Math` tests pass, you're done! The `showAsMath` method has the following signature:
+```scala
+  def showAsMath(tree: Expr): String = ???
+```
+## Concerning Tests
+
+Tests exist and should be used... Here's how we do it...
+
+3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `showAsMath` to work with it. To implement the operation correctly, we will need an `Infinity` case object, to return if division by zero happens. `Infinity` also is an expression, has no methods or fields, and doing _anything_ with it returns `Infinity` too.

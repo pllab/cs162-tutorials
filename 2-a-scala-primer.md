@@ -83,7 +83,7 @@ scala>
 
 1. Create `alex`, a friend of `rob`'s, who will say "Hello!". Test out whether `alex` can talk in the Scala console.
 1. Create `sally`, a friend of `rob`'s and `alex`'s, who will say "Hi you two!". Test out whether `sally` can talk in the Scala console, too.
-2. Make a main method (look at the [previous tutorial] for hints on what types it has to have) that makes `rob`, `alex` and `sally` talk, in any order you wish. Run the program from SBT's console, as done in the previous tutorial.
+2. Make a `main` method (look at the [previous tutorial] for hints on what types it has to have) that makes `rob`, `alex` and `sally` talk, in any order you wish. Run the program from SBT's console, as done in the previous tutorial.
 
 ## Pure Object-Oriented Programming
 

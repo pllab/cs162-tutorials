@@ -26,6 +26,8 @@ object UniquePerson {
 ```
 Here we have an object that contains one field (called `message`, and implicitly of type `String`) and a method `talk` that takes no parameters and returns a `Unit` -- it merely prints out the value held in the `message` field.
 
+> A field is just a value or variable inside an object. The keyword `val` can be used to define immutable values, and the keyword `var` when mutability is needed. These aren't specific to defining fields, and can also define local variables, or be used in the console. Try to use `var` as little as possible. Whenever that seems hard, there's something you're missing about how to write Scala.
+
 > When you don't really know what to fill a method with, write `???`. `???` is a value that will satisfy all typing conditions that are needed (for example, `def getString(): String = ???` will make `???` return a `String`), but when executed will throw an error (saying `Unimplemented exception`). This is useful to see whether all the pieces are set properly before actually testing the code out. Sometimes it's hard to start filling all the methods in, so remember you have this option.
 
 As previously seen, to call a method on an object, we need to provide the object and method in the following notation: `<object>.<method>(<arguments>)`. For example, to run the above method, we'd invoke it as `UniquePerson.talk()`. This dot notation is not specific to only methods; we could also do `println(UniquePerson.message)` to reach the `message` field.

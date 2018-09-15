@@ -171,8 +171,9 @@ class Person(message: String) {
 ```scala
   println(s"${this.name}: ${this.message}")
 ```
-6. Make some new instances of the `Person` class in the Scala console and see if they can talk with each other so that the output looks exactly like this:
+6. Extend the `main` method you previously made, add two new `Person` instances and make them talk with each other to produce the following output:
 ```
 Grievous: General Kenobi!
 Obi: Hello there!
 ```
+Remember that you can use the console to try stuff before commiting to a solution.

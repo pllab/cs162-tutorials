@@ -1,5 +1,6 @@
 
-# Control Flow, Part 1
+
+# Control Structures
 
 Scala has a small set of powerful control flow mechanisms that mostly are similar to constructs known from other languages: `if`, `while`, `match`, `try` and `for`. Scala focuses on defining high-level control structures through libraries while leaving its core language minimal, yet sufficient. We will discuss the first four now, and leave `for` for a later tutorial.
 
@@ -171,12 +172,14 @@ Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
 ```
 ### Exercises
 
-1. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `EvaluationSpec` tests pass, you're done! The `evaluate` method has the following signature:
-```scala
-  def evaluate(tree: Expr): Int = ???
-```
-2. In a similar way as with `evaluate`, write a `toMath` method that prints every `Expr` in its mathematical form. For example, `toMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `ToMathSpec` tests pass, you're done! The `toMath` method has the following signature:
+1. In a similar way as with `evaluate`, write a `toMath` method that prints every `Expr` in its mathematical form. For example, `toMath(Add(Add(Num(2), Num(4)), Num(3)))` should output `(2 + 4) + 3`. If all `ToMathSpec` tests pass, you're done! The `toMath` method has the following signature:
 ```scala
   def toMath(tree: Expr): String = ???
 ```
+2. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `EvaluationSpec` tests pass, you're done! The `evaluate` method has the following signature:
+```scala
+  def evaluate(tree: Expr): Int = ???
+```
 3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `toMath` to work with it. To implement the operation correctly, we will need to throw an exception when dividing by 0, and present the correct result otherwise. This will require the use of `if`, `throw` and `match`! If the `HardSpec` tests pass, you're done!
+
+> **Hint:** To solve all of these, you should build simple cases and then look at how they connect to form larger expressions. This may require some quite straightforward recursion...

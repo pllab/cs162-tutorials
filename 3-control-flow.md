@@ -169,23 +169,12 @@ As you can see, the parameters of all binary operations (`+`, `-` and `*`) are e
 ```scala
 Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
 ```
-1. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `Evaluation` tests pass, you're done! The `evaluate` method has the following signature:
+1. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `EvaluationSpec` tests pass, you're done! The `evaluate` method has the following signature:
 ```scala
   def evaluate(tree: Expr): Int = ???
 ```
-2. In a similar way as with `evaluate`, write a `showAsMath` method that prints every `Expr` in its mathematical form. For example, `showAsMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `Show As Math` tests pass, you're done! The `showAsMath` method has the following signature:
+2. In a similar way as with `evaluate`, write a `showAsMath` method that prints every `Expr` in its mathematical form. For example, `showAsMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `ShowAsMathSpec` tests pass, you're done! The `showAsMath` method has the following signature:
 ```scala
   def showAsMath(tree: Expr): String = ???
 ```
-## Concerning Tests
-
-Testing is very important for software development. Tests should be written for any piece of code that has an even slight chance of introducing non-trivial behaviors (almost all of code, period). Without going into a detailed examination of how to do it in Scala (we'll do that later!), there's just several things you need to know to be able to write tests of your own.
-
-### Assertions
-
-Scala allows you to write assertions: checks that might fail at runtime and stop your program from doing something silly. One such assertion might be something like:
-```scala
-assert(n != 0, "n mustn't be 0 at this point!")
-```
-
-3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `showAsMath` to work with it. To implement the operation correctly, we will need an `Infinity` case object, to return if division by zero happens. `Infinity` also is an expression, has no methods or fields, and doing _anything_ with it returns `Infinity` too.
+3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `showAsMath` to work with it. To implement the operation correctly, we will need to throw an exception when dividing by 0, and present the correct result otherwise. This will require the use of `if`, `throw` and `match`! If the `HardSpec` tests pass, you're done!

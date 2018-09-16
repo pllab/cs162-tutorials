@@ -175,8 +175,8 @@ Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
 ```scala
   def evaluate(tree: Expr): Int = ???
 ```
-2. In a similar way as with `evaluate`, write a `showAsMath` method that prints every `Expr` in its mathematical form. For example, `showAsMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `ShowAsMathSpec` tests pass, you're done! The `showAsMath` method has the following signature:
+2. In a similar way as with `evaluate`, write a `toMath` method that prints every `Expr` in its mathematical form. For example, `toMath(Add(Num(2), Num(3)))` should output `2 + 3`. If all `ToMathSpec` tests pass, you're done! The `toMath` method has the following signature:
 ```scala
-  def showAsMath(tree: Expr): String = ???
+  def toMath(tree: Expr): String = ???
 ```
-3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `showAsMath` to work with it. To implement the operation correctly, we will need to throw an exception when dividing by 0, and present the correct result otherwise. This will require the use of `if`, `throw` and `match`! If the `HardSpec` tests pass, you're done!
+3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `toMath` to work with it. To implement the operation correctly, we will need to throw an exception when dividing by 0, and present the correct result otherwise. This will require the use of `if`, `throw` and `match`! If the `HardSpec` tests pass, you're done!

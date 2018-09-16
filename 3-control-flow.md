@@ -169,6 +169,8 @@ As you can see, the parameters of all binary operations (`+`, `-` and `*`) are e
 ```scala
 Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
 ```
+### Exercises
+
 1. Fill in the `evaluate` method that will, given an expression, like `Add(Num(2), Sub(Num(7), Num(3)))`, give you back the result of those operations: `2 + (7 - 3) = 2 + 4 = 6`. Use pattern matching over the `Expr` trait to accomplish this. Use the scala interpreter console if you're not sure which way to go, and try solving the problem on paper first, to be sure you have all the edge cases. Run `test` in the SBT console to run our prepared tests. If all `EvaluationSpec` tests pass, you're done! The `evaluate` method has the following signature:
 ```scala
   def evaluate(tree: Expr): Int = ???

@@ -1,7 +1,7 @@
 
 # Control Flow, Part 1
 
-Scala has a small set of powerful control flow mechanisms that mostly are similar to constructs known from other languages: `if`, `while`, `match`, `for` and `try`. Scala focuses on defining high-level control structures through libraries while leaving its core language minimal, yet sufficient. We will discuss the first three now, and leave `for` and `try` for a later tutorial.
+Scala has a small set of powerful control flow mechanisms that mostly are similar to constructs known from other languages: `if`, `while`, `match`, `try` and `for`. Scala focuses on defining high-level control structures through libraries while leaving its core language minimal, yet sufficient. We will discuss the first four now, and leave `for` for a later tutorial.
 
 ## Branching with `if`s
 
@@ -39,6 +39,26 @@ do { <body> } while(<condition>)
 ```
 While (no pun intended) many languages make good use of these constructs, they require a variable to be able to stop iteration, and this is generally considered bad form in Scala. We will discuss ways to evade loops later on in the tutorials, but you should know that there are situations where loops are warranted and put to good use.
 > `while` loops do **not** return a useful value, as we discussed `if`s do.
+
+## Trying for Exceptions with `try`
+
+Trying a piece of code that might throw exceptions and catching those exceptions is very similar to C++ or Java:
+```
+try {
+  <body>
+} catch {
+  case <exception> => <when-caught-do>
+  ...
+} finally {
+  <finally-do>
+}
+```
+Try-catch-finally blocks _do_ return values, so they can be used in computations. 
+To throw exceptions from Scala, one can use the	`throw` statement, like this:
+```scala
+throw new Exception("something is wrong")
+```
+You can substitute the `java.lang.Exception` class for any other class that extends [`java.lang.Throwable`](https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html).
 
 ## Pattern Matching with `match`
 
@@ -159,6 +179,13 @@ Add(Num(2), Sub(Num(7), Num(3)))      // = 2 + (7 - 3)
 ```
 ## Concerning Tests
 
-Tests exist and should be used... Here's how we do it...
+Testing is very important for software development. Tests should be written for any piece of code that has an even slight chance of introducing non-trivial behaviors (almost all of code, period). Without going into a detailed examination of how to do it in Scala (we'll do that later!), there's just several things you need to know to be able to write tests of your own.
+
+### Assertions
+
+Scala allows you to write assertions: checks that might fail at runtime and stop your program from doing something silly. One such assertion might be something like:
+```scala
+assert(n != 0, "n mustn't be 0 at this point!")
+```
 
 3. **Hard.** Add an additional case class `Div` to the calculator and implement `evaluate` and `showAsMath` to work with it. To implement the operation correctly, we will need an `Infinity` case object, to return if division by zero happens. `Infinity` also is an expression, has no methods or fields, and doing _anything_ with it returns `Infinity` too.

@@ -25,7 +25,7 @@ in Scala we can have `if` _be_ an expression on its own, and carry the value thr
 ```scala
 val y = 6
 val x = if(y > 5) "big" else "small"
-println(x) 		            // prints 'big'
+println(x)                // prints 'big'
 ```
 This stems from functional programming, where programs are viewed as computations that result in a value, and thus every smaller part of programs has to amount in a value as well.
 
@@ -55,7 +55,7 @@ try {
 }
 ```
 Try-catch-finally blocks _do_ return values, so they can be used in computations. 
-To throw exceptions from Scala, one can use the	`throw` statement, like this:
+To throw exceptions from Scala, one can use the `throw` statement, like this:
 ```scala
 throw new Exception("something is wrong")
 ```
@@ -148,7 +148,17 @@ By using the `extends` keyword, we made sure that the case classes `Point` and `
 ```scala
 sealed trait Shape
 ```
-The `sealed` keyword allows for `Shape` to be extended only in the same file where it is defined, in turn allowing you to idiomatically limit how many options are possible when matching this trait. We can now say that when matching `Shape`, the only two options to match against (excluding further constraints via `if` guards and special interesting values) are `Point` and `Line`.
+The `sealed` keyword allows for `Shape` to be extended only in the same file where it is defined, in turn allowing you to idiomatically limit how many options are possible when matching this trait. We can now say that when matching `Shape`, the only two options to match against (excluding further constraints via `if` guards and special interesting values) are `Point` and `Line`. 
+
+To show off some nested matching, consider printing out a message if a given `shape` is a `Line` such that the line's endpoints are such that the sum of their `x` components is 0. This is a weird request, but in other languages it might take a number of lines to get to the point of it. In Scala, we can do: 
+```scala
+shape match {
+  case Line(Point(x1, _), Point(x2, _)) if x1 + x2 == 0 => 
+    println("WEIRD LINE!")
+  // other cases here...
+}
+```
+Remember that you can use nested matching, as it's a very useful pattern!
 
 ### Exercise Project: Calculator
 

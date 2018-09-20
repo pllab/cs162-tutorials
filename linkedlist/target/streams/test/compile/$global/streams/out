@@ -1,0 +1,4 @@
+[0m[[0m[33mwarn[0m] [0m[0m/home/mika/Projects/cs162-tutorials/linkedlist/src/test/scala/LinkedListSpec.scala:39:11: comparing values of types Nothing and Boolean using `==' will always yield false[0m
+[0m[[0m[33mwarn[0m] [0m[0m    assert(ListEnd[Unit]().hasMore == false)[0m
+[0m[[0m[33mwarn[0m] [0m[0m          ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

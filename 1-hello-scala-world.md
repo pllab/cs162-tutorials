@@ -218,3 +218,4 @@ This concludes our first tutorial on Scala, where the main point was getting use
 
 1. What output do you get if you follow the suggestion given by SBT when trying to execute `Main.main` without arguments in the interpreter console?
 
+> If you're having problems with compiling but you still want to use the interactive console, you can use `consoleQuick` from the SBT console.

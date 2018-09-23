@@ -2,7 +2,7 @@
 
 To use Scala in a productive manner, the use of SBT (Scala Build Tool) is encouraged. SBT is an interactive environment in which one can compile, test and run Scala projects quickly, independent of their size and complexity. It also serves as a package manager for including libraries without having to download them manually. SBT contains a console inside it, where you can test out pieces of code if you're not sure what they would yield when added to your projects.
 
-### Getting Started
+### Project Basics
 
 To get started, we can create a minimal Scala project by running:
 
@@ -61,7 +61,7 @@ sbt:helloworld>
 
 No matter how large your project gets, the usage of SBT stays the same overall. There are additional commands which might come in useful, including `reload` for when the build file changes, `console` to run an interactive scala console inside SBT, and `exit` to leave SBT. You shouldn't have to restart SBT even once while developing your projects. If new files are added to the `src/` folder hierarchy, SBT will notice them next time you run a command and recompile with them.
 
-# Scala Interactive Console
+### Scala Interactive Console
 
 Scala contains an interactive console (otherwise known as a REPL, or read-evaluate-print-loop), where you can type valid (or invalid!) Scala expressions and get them to immediately evaluate instead of being compiled.
 
@@ -98,6 +98,8 @@ scala>      <user hits CTRL+D>
 sbt:helloworld> exit
 [info] shutting down server
 ```
+
+## Asciicast
 
 To see all of this in practice, follow this asciicast for a step-by-step illustration of the process, done on a CSIL machine.
 

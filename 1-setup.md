@@ -61,7 +61,7 @@ sbt:hello-world>
 
 No matter how large your project gets, the usage of SBT stays the same overall. There are additional commands which might come in useful, including `reload` for when the build file changes, `console` to run an interactive scala console inside SBT, and `exit` to leave SBT. You shouldn't have to restart SBT even once while developing your projects. If new files are added to the `src/` folder hierarchy, SBT will notice them next time you run a command and recompile with them.
 
-### Scala Interactive Console
+### Scala REPL
 
 Scala contains an interactive console (otherwise known as a REPL, or read-evaluate-print-loop), where you can type valid (or invalid!) Scala expressions and get them to immediately evaluate instead of being compiled.
 
@@ -90,7 +90,7 @@ scala>
 ```
 We can also try a `println` statement or a method call, such as `Main.main`. Don't be intimidated while in the console, you can try out things here with no reprecussions until they get to work. Reading the error messages is instrumental to understanding a language. Scala tries to give informative error messages, sometimes even going above and beyond the call of duty to give suggestions. 
 
-We can return from this Scala interpreter console to the SBT one by pressing `CTRL+D`.
+We can return from this Scala REPL to the SBT one by pressing `CTRL+D`.
 
 ```sbt
 scala>      <user hits CTRL+D> 
@@ -98,6 +98,9 @@ scala>      <user hits CTRL+D>
 sbt:hello-world> exit
 [info] shutting down server
 ```
+### A note on multiline code in the Scala REPL
+
+By default, the REPL allows only single lines of code, and evaluates after them. To fix this and write (or paste!) multiple lines into the REPL, type `:paste` when you start it. After that, it will allow multiline input when needed.
 
 ## Asciicast
 

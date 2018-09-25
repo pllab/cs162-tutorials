@@ -11,7 +11,7 @@ To get started, we can create a minimal Scala project by running:
 ```
 When you run this command, it will ask you for some minimal details (name, package and version) after which a project folder will be generated for you.
 
-You will be presented by a new folder with the name that you input (for the tutorial, we'll use the name `hello-world` and the organization `cs160.tuts`. The structure of the folder will be as follows:
+You will be presented by a new folder with the name that you input (for the tutorial, we'll use the name `hello-world` and the organization `cs162.tuts`. The structure of the folder will be as follows:
 
 ```
 hello-world

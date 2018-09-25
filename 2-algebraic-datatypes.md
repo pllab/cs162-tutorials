@@ -26,13 +26,9 @@ In Scala, sum types can be expressed using traits and case classes. Examples of 
 ```scala
 trait Expr
 case class Var(name: String) extends Expr
-
 case class Num(number: Double) extends Expr
-
 case class UnOp(operator: String, arg: Expr) extends Expr
-
-case class BinOp(operator: String, left: Expr, right: Expr) 
-  extends Expr
+case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
 ```
 If we now have a variable of type `Expr`, it is true that this variable can have only one value, and that value has to be one of the case classes that extend `Expr`, in turn behaving exactly like a sum type does.
 > Hint: to make sure that there are no cases we missed, we can use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
@@ -80,12 +76,12 @@ You will need to take care of these three cases, and more, as listed below:
 3. (1 point) the expression `1 * x` should become `x`, regardless of what type of expression `x` is
 4. (1 point) the expression `0 * x` should become `0`, regardless of what type of expression `x` is
 5. (1 point) the expression `x - x` should become `0`, regardless of what type of expression `x` is
-6. (2 points) for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Number(2), Number(3))` should evaluate to `Number(5)`.
-7. (3 points) the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Number(7))` should be simplified to `BinOp("+", Number(7), Number(7))`.
+6. (2 points) for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Num(2), Num(3))` should evaluate to `Num(5)`.
+7. (3 points) the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Num(7))` should be simplified to `BinOp("+", Num(7), Num(7))`.
 
 > Note: you might need to reorder some or all of the pattern match cases to make all the tests pass, as matching does **not** fall through like `switch` cases do.
 
-This assignment is automatically graded by built-in tests. You can run them from the SBT console by running `testOnly cs162.tuts.calculator.simplifyExpr` to run only the `simplifyExpr` tests. The asciicast below shows what tests look like when ran.
+This assignment is automatically graded by built-in tests. You can run them from the SBT console by running `testOnly cs162.tuts.calculator.simplifyExpr` to run only the `simplifyExpr` tests. The asciicast below shows what tests look like when ran. You can also run all the tests for this project by simply running `test`.
 
 **`missing asciicast goes here`**
 

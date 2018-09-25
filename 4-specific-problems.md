@@ -67,8 +67,8 @@ case class Orange(name: String) extends Fruit {
 ```
 Fix the code above (change the signature of the `rename` method in the trait, for example)  so that the following code _can't_ compile:
 ```scala
-case class Avocado(name: String) extends Fruit {
-  override def rename(into: String) = new Orange(into)
+case class Tomato(name: String) extends Fruit {
+  override def rename(into: String) = new Apple(into)
 }
 ```
 > Hint: read chapter 19 if you're sort of lost on this one...

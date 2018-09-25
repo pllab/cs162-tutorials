@@ -1,3 +1,4 @@
+
 # Algebraic Datatypes
 
 > Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" up to (and including) chapter 7, and chapter 15. If you haven't, go and review this material. The tutorials will outline specific ways in which we use Scala in this course.
@@ -6,14 +7,21 @@ Algebraic datatypes are composite types, most often **products**, **sums** and *
 
 - a product of `A` and `B` is a type `(A, B)` that contains both a value of `A` and a value of `B`. These are also called _tuples_ or _structs_.
 - a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint sums_.
-- a function from `A` to `B` is a type `A => B` that produces a value of `B` given a value of `A`.
+- a power type of `A` and `B` is a type `A => B` that produces a value of `B` given a value of `A`. These are also called _function_ types.
 
 Scala has tuples and functions built-in (chapter 3 of the book introduces these constructs). Classes can also be used to represent products, where instead of the index of the argument, our structure has a name both for itself and its particular fields. We will go over functions in the next tutorial.
 
 ## Sum Types
 
 ### Definition
-In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book, and we'll be using the same running example as the book does in this part: a simple calculator with variables, numbers, unary and binary operations.
+
+Sum types denote disjoint values. We'll be using the same running example as the book does in this part: a calculator might need expressions which are either variables, numbers, unary or binary operations. In the notation above, this would be written as:
+
+```scala
+Expr = Var(String) | Num(Double) | UnOp(String, Expr) | BinOp(String, Expr, Expr) 
+```
+
+In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book.
 
 ```scala
 trait Expr
@@ -30,6 +38,10 @@ If we now have a variable of type `Expr`, it is true that this variable can have
 > Hint: to make sure that there are no cases we missed, we can use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
 
 ### Usage
+To assign a value to a variable of type `Expr`, we need to decide on one value type, as `Expr` has no value by itself. One example could be:
+```scala
+val e: Expr = Var("x")
+```
 To check whether a sum type variable currently has a value of a certain specific case class, we use pattern matching. Pattern matching is described in chapter 7.5 and then later detailed in chapter 15. Pattern matching is similar to switch from languages like Java and C, but additionally enables us to match values by type. 
 
 Furthermore, for case classes, it enables us to match nested structures. For example, for the `Expr` type defined above, we can match the following case:
@@ -76,3 +88,14 @@ You will need to take care of these three cases, and more, as listed below:
 This assignment is automatically graded by built-in tests. You can run them from the SBT console by running `testOnly cs162.tuts.calculator.simplifyExpr` to run only the `simplifyExpr` tests. The asciicast below shows what tests look like when ran.
 
 **`missing asciicast goes here`**
+
+## Sidenote: Naming Conventions Explained
+
+The names "product", "sum" and "power" come from the same source as the name "algebraic". A shallow explanation relates to algebra which is easily observed when looking at the cardinality of the types in question. If there exists a void type, that has no values, we can say that it has cardinality $0$. In Scala, this is the `Nothing` type. The `Unit` type has one value, called `()` in Scala. The cardinality of `Unit` is therefore $1$. `Boolean`, obviously, has $2$ values, `true` and `false`.
+
+If we ask about the cardinality of `(A, B)`, where `A` has the cardinality $a$ and `B` has cardinality $b$, we can see that it is equal to $a * b$, hence the name **product**. This is because any value of one type can be mixed with any value of the other. For example, `(Boolean, Unit)` has two values: `(true, ())` and `(false, ())`. On the other hand, `(Boolean, Boolean)` has $4$ values.
+
+Looking at `A | B`, the number of possible values is equal to the sum of the cardinalities of `A` and `B`, thus $a + b$. For example, `Boolean + Unit` has $3$ values: either `Boolean true`, `Boolean false` or `Unit ()`, thus 3. This is why the types are called **sum** types.
+
+The function type `A => B` has an output value for every input value given. This means that for every possible value of the input, we have all the possibilities of the output type. This means (following the previous two composite types) that a function is describable in term of $a$ values of type `B`, meaning that it is equal to `(B, B, ...a times... , B)`. 
+For the sake of an example, let's imagine that a type `Tri = One | Two | Three` exists. This type obviously has a cardinality of $1 + 1 + 1 = 3$ (and as such is equal to `Boolean + Unit` above). The type `Boolean => Tri` is equal to `(Tri, Tri)`, which we know has a cardinality of $3 * 3 = 9$. This is, however, equal to $3^2$, which is exactly the cardinality of `Tri` to the _power_ of the cardinality of `Boolean`. The type `Tri => Boolean` on the other hand is equal to `(Boolean, Boolean, Boolean)`, which means that it has a cardinality of $2 * 2 * 2 = 2^3 = 8$, equivalent to the cardinality of `Boolean` to the _power_ of the cardinality of `Tri`. This is why they're called **power** types.

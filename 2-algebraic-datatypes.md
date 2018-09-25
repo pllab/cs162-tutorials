@@ -1,9 +1,9 @@
 
-# Algebraic Datatypes
+# Algebraic Data Types
 
 > Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" up to (and including) chapter 7, and chapter 15. If you haven't, go and review this material. The tutorials will outline specific ways in which we use Scala in this course.
 
-Algebraic datatypes are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
+Algebraic data types are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
 
 - a product of `A` and `B` is a type `(A, B)` that contains both a value of `A` and a value of `B`. These are also called _tuples_ or _structs_.
 - a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint unions_.
@@ -49,7 +49,7 @@ e match {
 ```
 Without pattern matching on types, we would have to check that the variable `e` is of type `BinOp` first, then match the internal parts separately, creating lots of unneeded code.
 
-## Algebraic Datatypes in Programming Languages
+## Algebraic Data Types in Programming Languages
 
 When implementing programming languages, we notice that recursive structures come in handy, as many languages are themselves recursive. For instance, with the simple mathematical expression example above, we see that the fields of `UnOp` and `BinOp` are themselves `Expr`, meaning that we can create expressions of greater complexity. One such expression might grow in the following way:
 

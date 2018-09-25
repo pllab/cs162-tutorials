@@ -24,14 +24,14 @@ Expr = Var(String) | Num(Double) | UnOp(String, Expr) | BinOp(String, Expr, Expr
 In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book.
 
 ```scala
-trait Expr
+sealed trait Expr
 case class Var(name: String) extends Expr
 case class Num(number: Double) extends Expr
 case class UnOp(operator: String, arg: Expr) extends Expr
 case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
 ```
 If we now have a variable of type `Expr`, it is true that this variable can have only one value, and that value has to be one of the case classes that extend `Expr`, in turn behaving exactly like a sum type does.
-> Hint: to make sure that there are no cases we missed, we can use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
+To make sure that there are no cases we missed, we use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
 
 ### Usage
 To assign a value to a variable of type `Expr`, we need to decide on one value type, as `Expr` has no value by itself. One example could be:
@@ -83,7 +83,7 @@ Run `testOnly cs162.tuts.calculator.simplifyExpr` to test only the `simplifyExpr
 
 8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
 ```scala
-trait Expr {
+sealed trait Expr {
   def evaluate: Double
 }
 ```

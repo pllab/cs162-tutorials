@@ -6,7 +6,7 @@
 Algebraic datatypes are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
 
 - a product of `A` and `B` is a type `(A, B)` that contains both a value of `A` and a value of `B`. These are also called _tuples_ or _structs_.
-- a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint sums_.
+- a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint unions_.
 - a power type of `A` and `B` is a type `A => B` that produces a value of `B` given a value of `A`. These are also called _function_ types.
 
 Scala has tuples and functions built-in (chapter 3 of the book introduces these constructs). Classes can also be used to represent products, where instead of the index of the argument, our structure has a name both for itself and its particular fields. We will go over functions in the next tutorial.

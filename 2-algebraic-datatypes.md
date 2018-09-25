@@ -1,0 +1,78 @@
+# Algebraic Datatypes
+
+> Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" up to (and including) chapter 7, and chapter 15. If you haven't, go and review this material. The tutorials will outline specific ways in which we use Scala in this course.
+
+Algebraic datatypes are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
+
+- a product of `A` and `B` is a type `(A, B)` that contains both a value of `A` and a value of `B`. These are also called _tuples_ or _structs_.
+- a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint sums_.
+- a function from `A` to `B` is a type `A => B` that produces a value of `B` given a value of `A`.
+
+Scala has tuples and functions built-in (chapter 3 of the book introduces these constructs). Classes can also be used to represent products, where instead of the index of the argument, our structure has a name both for itself and its particular fields. We will go over functions in the next tutorial.
+
+## Sum Types
+
+### Definition
+In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book, and we'll be using the same running example as the book does in this part: a simple calculator with variables, numbers, unary and binary operations.
+
+```scala
+trait Expr
+case class Var(name: String) extends Expr
+
+case class Num(number: Double) extends Expr
+
+case class UnOp(operator: String, arg: Expr) extends Expr
+
+case class BinOp(operator: String, left: Expr, right: Expr) 
+  extends Expr
+```
+If we now have a variable of type `Expr`, it is true that this variable can have only one value, and that value has to be one of the case classes that extend `Expr`, in turn behaving exactly like a sum type does.
+> Hint: to make sure that there are no cases we missed, we can use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
+
+### Usage
+To check whether a sum type variable currently has a value of a certain specific case class, we use pattern matching. Pattern matching is described in chapter 7.5 and then later detailed in chapter 15. Pattern matching is similar to switch from languages like Java and C, but additionally enables us to match values by type. 
+
+Furthermore, for case classes, it enables us to match nested structures. For example, for the `Expr` type defined above, we can match the following case:
+```scala
+e match {
+  case BinOp("+", UnOp("-", a), Num(n)) => ...
+  ...
+}
+```
+Without pattern matching on types, we would have to check that the variable `e` is of type `BinOp` first, then match the internal parts separately, creating lots of unneeded code.
+
+## Algebraic Datatypes in Programming Languages
+
+When implementing programming languages, we notice that recursive structures come in handy, as many languages are themselves recursive. For instance, with the simple mathematical expression example above, we see that the fields of `UnOp` and `BinOp` are themselves `Expr`, meaning that we can create expressions of greater complexity. One such expression might grow in the following way:
+
+```
+   Expr
+=> BinOp("*", ?, ?)
+=> BinOp("*", Num(?), ?)
+=> BinOp("*", Num(2), ?)
+=> BinOp("*", Num(2), BinOp("+", ?, ?))
+=> BinOp("*", Num(2), BinOp("+", Num(3), ?))
+=> BinOp("*", Num(2), BinOp("+", Num(3), Num(4)))
+```
+The observed recursion is called **structural recursion** here, due to the fact that it's occuring while building up structures. The cases that don't use `Expr` as part of their construction would be the base cases for recursion. The syntaxes of both natural and programming languages are structurally recursive in nature. This is why it is very important to master both building recursive structures using algebraic types, as well as manipulating and traversing these structures.
+
+One benefit of using structural recursion is _self-similarity_. If a function is defined to work on an `Expr`, it can then be applied to any part of a complex expression simply by calling it on that expression's parts that, themselves, are `Expr` as well.
+
+## Assignment: Calculator
+
+Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` function for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones. 
+
+You will need to take care of these three cases, and more, as listed below:
+1. (1 point) the expression `-(-n)` should become `n`, regardless of what type of expression `n` is
+2. (1 point) the expression `0 + x` should become `x`, regardless of what type of expression `x` is
+3. (1 point) the expression `1 * x` should become `x`, regardless of what type of expression `x` is
+4. (1 point) the expression `0 * x` should become `0`, regardless of what type of expression `x` is
+5. (1 point) the expression `x - x` should become `0`, regardless of what type of expression `x` is
+6. (2 points) for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Number(2), Number(3))` should evaluate to `Number(5)`.
+7. (3 points) the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Number(7))` should be simplified to `BinOp("+", Number(7), Number(7))`.
+
+> Note: you might need to reorder some or all of the pattern match cases to make all the tests pass, as matching does **not** fall through like `switch` cases do.
+
+This assignment is automatically graded by built-in tests. You can run them from the SBT console by running `testOnly cs162.tuts.calculator.simplifyExpr` to run only the `simplifyExpr` tests. The asciicast below shows what tests look like when ran.
+
+**`missing asciicast goes here`**

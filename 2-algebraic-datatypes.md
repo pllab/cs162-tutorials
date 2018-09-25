@@ -58,7 +58,7 @@ The observed recursion is called **structural recursion** here, due to the fact 
 
 One benefit of using structural recursion is _self-similarity_. If a function is defined to work on an `Expr`, it can then be applied to any part of a complex expression simply by calling it on that expression's parts that, themselves, are `Expr` as well.
 
-## Assignment: Calculator
+## Assignment: Expression Simplification
 
 Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` function for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones. 
 

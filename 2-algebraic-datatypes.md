@@ -68,7 +68,7 @@ One benefit of using structural recursion is _self-similarity_. If a function is
 
 ## Assignment: Expression Simplification
 
-Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` function for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones. 
+Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` method for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones. 
 
 You will need to take care of these three cases, and more, as listed below:
 1. (1 point) the expression `-(-n)` should become `n`, regardless of what type of expression `n` is
@@ -79,11 +79,29 @@ You will need to take care of these three cases, and more, as listed below:
 6. (2 points) for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Num(2), Num(3))` should evaluate to `Num(5)`.
 7. (3 points) the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Num(7))` should be simplified to `BinOp("+", Num(7), Num(7))`.
 
-> Note: you might need to reorder some or all of the pattern match cases to make all the tests pass, as matching does **not** fall through like `switch` cases do.
+Run `testOnly cs162.tuts.calculator.simplifyExpr` to test only the `simplifyExpr` functionality. You can also run all the tests for this project by simply running `test` as shown in the first tutorial.
 
-This assignment is automatically graded by built-in tests. You can run them from the SBT console by running `testOnly cs162.tuts.calculator.simplifyExpr` to run only the `simplifyExpr` tests. The asciicast below shows what tests look like when ran. You can also run all the tests for this project by simply running `test`.
+8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
+```scala
+trait Expr {
+  def evaluate: Double
+}
+```
+The goal of this method is to evaluate a certain expression down to a single number. Include the binary operations `+`, `-` and `*`, as well as the unary operation `-`. Read chapter 14 of the text book to get a handle of tests and assertions and write your own tests for this method to submit with the code. All variables evaluate to **1** in operations. An example of `evaluate` would be:
 
-**`missing asciicast goes here`**
+```scala
+evaluate(Num(100))
+// results in 100
+
+evaluate(BinOp("-", Num(10), Num(7))
+// results in 10 - 7 = 3
+
+evaluate(BinOp("+", Num(10), UnOp("-", Num(7)))
+// results in 10 + (-(7)) = 10 + (-7) = 3
+
+evaluate(BinOp("+", Num(3), BinOp("*", Var("this is one"), Num(7))))
+// results in 10, as 3 + 1 * 7 = 3 + 7 = 10
+```
 
 ## Sidenote: Naming Conventions Explained
 

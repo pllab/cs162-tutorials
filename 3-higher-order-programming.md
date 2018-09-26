@@ -136,8 +136,6 @@ or the following fold that operates on type `String` and returns the type `Int`;
 
 ## Assignment
 
-[//]: # (Same thing about needing more explicit directions.)
-
 1. (10 points) Open the `mylist` project and fill in the missing methods in the `MyList` trait and accompanying case classes. The trait includes the following methods that need to be implemented correctly:
 
 ```scala
@@ -171,5 +169,3 @@ trait BinTree[T] {
 ```
 
 This is a project similar to the previous one, but with a different kind of structure underneath. Try to follow the same logic as above, and change only the parts that have to do with the structure itself.
-
-[//]: # (Again, I think we should use unit tests to give them examples.)

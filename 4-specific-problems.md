@@ -1,7 +1,5 @@
 # Specific Problems
 
-[//]: # (These problems aren't explicit enough about the expected deliverable; how are the students supposed to provide their answers?)
-
 > Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" chapters 2--13 and especially chapters **19**, **20**, and **21**. If you haven't, go and review this material. The tutorial will outline specific ways in which we use Scala in this course.
 
 This tutorial is basically just an extended exercise after reading chapters 19, 20, and 21. Use the techniques for tailrec annotations and type bounds to fix the problems with the code below.

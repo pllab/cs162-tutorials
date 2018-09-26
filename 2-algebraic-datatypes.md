@@ -75,8 +75,6 @@ One benefit of using structural recursion is _self-similarity_. If a function is
 
 ## Assignment: Expression Simplification
 
-[//]: # (I think we need more explicit directions for the students on how to create this part of the project, since we're jumping from part 1 of the tutorial (which describes downloading a template) to this, which just says to 'open a project locally'. Maybe we can include these files in the downloaded template code? Also, up to this point we've been using the REPL and I don't think it's clear that they should be modifying the files themselves. In the provided code, we should get them uses to seeing '???' to indicate where to fill in code themselves. Also, all comments should be complete sentences with periods at the end.)
-
 Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` method for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones.
 
 You will need to take care of these three cases, and more, as listed below:
@@ -99,8 +97,6 @@ sealed trait Expr {
 ```
 
 The goal of this method is to evaluate a certain expression down to a single number. Include the binary operations `+`, `-` and `*`, as well as the unary operation `-`. Read chapter 14 of the text book to get a handle of tests and assertions and write your own tests for this method to submit with the code. All variables should evaluate to **1** in all operations (since we haven't specified assignment yet in our little arithmetic expression language). An example of `evaluate` would be:
-
-[//]: # (Rather than give the examples here, can we just put them in the unit tests and tell them to look there? I want them to get in the habit of always seeing unit tests for all code, and they have the advantage of being immediately executable.)
 
 ```scala
 evaluate(Num(100))

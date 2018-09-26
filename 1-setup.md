@@ -1,3 +1,4 @@
+
 # Setup
 
 To use Scala in a productive manner, the use of SBT (Scala Build Tool) is encouraged. SBT is an interactive environment in which one can compile, test and run Scala projects quickly, independent of their size and complexity. It also serves as a package manager for including libraries without having to download them manually. SBT contains a console inside it, where you can test out pieces of code if you're not sure what they would yield when added to your projects.
@@ -18,8 +19,8 @@ hello-world
 ├── build.sbt
 └── src
     ├── main
-    │   └── scala
-    │       └── Main.scala
+    │   └── scala
+    │       └── Main.scala
     └── test
         └── scala
             └── EmptySpec.scala
@@ -101,6 +102,8 @@ sbt:hello-world> exit
 ### A note on multiline code in the Scala REPL
 
 By default, the REPL allows only single lines of code, and evaluates after them. To fix this and write (or paste!) multiple lines into the REPL, type `:paste` when you start it. After that, it will allow multiline input when needed.
+
+Another way to reach the console, especially in the case where `console` doesn't work because your code has compile errors, is to use `consoleQuick` to skip compilation and run the console anyway. From that point, `consoleQuick` behaves the same way `console` does.
 
 ## Asciicast
 

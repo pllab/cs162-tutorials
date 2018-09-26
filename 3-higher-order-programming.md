@@ -9,7 +9,7 @@ Higher-order programming means that we can use some units of abstraction (functi
 Higher-order functions allow us to simplify the process of traversing recursive structures, such as those built from algebraic datatypes. As the running example, we'll use the expressions introduced in the previous tutorial. They were defined by the following sum type:
 
 ```scala
-trait Expr
+sealed trait Expr
 case class Var(name: String) extends Expr
 case class Num(number: Double) extends Expr
 case class UnOp(operator: String, arg: Expr) extends Expr

@@ -1,12 +1,12 @@
 
-# Algebraic Datatypes
+# Algebraic Data Types
 
 > Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" up to (and including) chapter 7, and chapter 15. If you haven't, go and review this material. The tutorials will outline specific ways in which we use Scala in this course.
 
-Algebraic datatypes are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
+Algebraic data types are composite types, most often **products**, **sums** and **functions** in practice, that we create by combining two types `A` and `B` in the following ways:
 
 - a product of `A` and `B` is a type `(A, B)` that contains both a value of `A` and a value of `B`. These are also called _tuples_ or _structs_.
-- a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint sums_.
+- a sum of `A` and `B` is a type `A | B` that either contains a value of `A` or a value of `B`, but not both. These are also called _disjoint unions_.
 - a power type of `A` and `B` is a type `A => B` that produces a value of `B` given a value of `A`. These are also called _function_ types.
 
 Scala has tuples and functions built-in (chapter 3 of the book introduces these constructs). Classes can also be used to represent products, where instead of the index of the argument, our structure has a name both for itself and its particular fields. We will go over functions in the next tutorial.
@@ -24,14 +24,14 @@ Expr = Var(String) | Num(Double) | UnOp(String, Expr) | BinOp(String, Expr, Expr
 In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book.
 
 ```scala
-trait Expr
+sealed trait Expr
 case class Var(name: String) extends Expr
 case class Num(number: Double) extends Expr
 case class UnOp(operator: String, arg: Expr) extends Expr
 case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
 ```
 If we now have a variable of type `Expr`, it is true that this variable can have only one value, and that value has to be one of the case classes that extend `Expr`, in turn behaving exactly like a sum type does.
-> Hint: to make sure that there are no cases we missed, we can use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
+To make sure that there are no cases we missed, we use the `sealed` modifier keyword to make the trait non-extendable outside the file it's defined in, which guarantees that Scala will check for totality (that we covered all the cases).
 
 ### Usage
 To assign a value to a variable of type `Expr`, we need to decide on one value type, as `Expr` has no value by itself. One example could be:
@@ -49,7 +49,7 @@ e match {
 ```
 Without pattern matching on types, we would have to check that the variable `e` is of type `BinOp` first, then match the internal parts separately, creating lots of unneeded code.
 
-## Algebraic Datatypes in Programming Languages
+## Algebraic Data Types in Programming Languages
 
 When implementing programming languages, we notice that recursive structures come in handy, as many languages are themselves recursive. For instance, with the simple mathematical expression example above, we see that the fields of `UnOp` and `BinOp` are themselves `Expr`, meaning that we can create expressions of greater complexity. One such expression might grow in the following way:
 
@@ -83,7 +83,7 @@ Run `testOnly cs162.tuts.calculator.simplifyExpr` to test only the `simplifyExpr
 
 8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
 ```scala
-trait Expr {
+sealed trait Expr {
   def evaluate: Double
 }
 ```

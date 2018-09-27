@@ -3,8 +3,10 @@
 **Due date: October 9, 2018 11:59:59 PM**
 
 In this assignment, you will familarize yourself with Scala, learn how
-to use the tools in Scala ecosystem and get used to test-driven
+to use the tools in Scala ecosystem, and get used to test-driven
 development using unit tests.
+
+This assignment is based on chapters 2--17 in the required textbook "Programming in Scala" 3rd edition, by Martin Odersky. You will need to read those chapters to do the assignment.
 
 ## Exercises
 
@@ -12,8 +14,7 @@ First, clone this repository and make sure that you are in the root
 directory of your clone when you are following the instructions.
 
 There are four tutorials in the `docs/` directory in Markdown format. You
-can read them on GitHub in a nicely formatted way (just like how this
-README document looks), or you can open the files in your favorite
+can read them on GitHub in a nicely formatted way, or you can open the files in your favorite
 text editor to read the Markdown source.
 
 The assignment is to go through the tutorials and to do the exercises
@@ -26,18 +27,19 @@ stuck.
 ## Grading
 
 You **must** use only the purely functional subset of Scala. This
-means that you are **not allowed** to use mutations, more explicitly
+means that you are **not allowed** to use mutations; more explicitly
 you must not use any of:
-- mutable variables created using `var` keyword,
 
-- mutable collections, e.g. anything under `scala.collection.mutable`,
+- Mutable variables, i.e., those created using the `var` keyword,
 
-- `Array` data type.
+- Mutable collections, e.g. anything under `scala.collection.mutable`,
+
+- The `Array` data type.
 
 If you use any mutation, you will automatically fail the assignment.
 
-Your code must compile. Invoking `compile` and `test:compile` on SBT
-console must succeed. Otherwise, you will automatically fail the
+Your code must compile. Invoking `compile` and `test:compile` in the SBT
+shell (as described in the first tutorial) must succeed. Otherwise, you will automatically fail the
 assignment.
 
 To grade your assignment, we will make sure that the unit tests are
@@ -47,9 +49,10 @@ of unit tests that pass.
 ## Submission
 
 We will use only the contents of the `src` directory for grading so
-make sure that all your code is in proper directories under it.  You
+make sure that all your code is in the proper directories under it.  You
 will use `turnin` on CSIL to submit your assignment.  To submit your
 assignment, on the root directory of the repository you cloned,
+
     1. Make sure that you run the unit tests on CSIL and get the
        result you expect.
     2. run `turnin assign1@cs162 src`.
@@ -63,4 +66,4 @@ assignment, on the root directory of the repository you cloned,
 - If you get stuck, go through the relevant parts of the
   text book and the relevant unit tests.
 - Don't be shy about asking questions on Piazza, or going to office
-  hours. You can ask questions anonymously and/or privately on Piazza.
+  hours and discussion section. You can ask questions anonymously and/or privately on Piazza (we prefer public questions if possible, so that everyone benefits from the answers).

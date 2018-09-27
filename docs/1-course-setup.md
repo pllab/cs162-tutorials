@@ -177,7 +177,7 @@ By default, the REPL allows only single lines of code, and evaluates the code af
 
 ## Exercises
 
-The first exercise (`introduction`) is a project that contains only two simple classes with missing method implementations (`???`) that need to be filled in. This project will teach you how to read the code and work with tests, and get comfortable with SBT and Scala in your favorite editor (no, really, use **sublime text**). The source code is in `src/main/scala/introduction`, while the tests are in `src/test/scala/IntroductionSpec.scala`.
+The first exercise (`introduction`) is a project that contains only two simple classes with missing method implementations (`???`) that need to be filled in. This project will teach you how to read the code and work with tests, and get comfortable with SBT and Scala in your favorite editor. The source code is in `src/main/scala/introduction`, while the tests are in `src/test/scala/IntroductionSpec.scala`.
 
 To run only tests for the `introduction` project, you can run:
 ```sbt

@@ -83,7 +83,6 @@ First, take care of `Calculator.simplifyHead`. This method simplifies certain pa
 ```scala
 object Calculator {
   def simplifyHead(expr: Expr): Expr = ???
-  ...
 }
 ```
 You will need to take care of these three cases, and more, as listed below:

@@ -1,7 +1,5 @@
 # Higher-Order Programming
 
-> Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" chapters 2--9 and chapters 16--17. Chapter 9 is very important, pay special attention to that one. If you haven't yet, go and review this material. The tutorial will outline specific ways in which we use Scala in this course.
-
 Higher-order programming means that we can use certain abstractions (functions, methods, etc.) in places where values are usually expected. Most of the time, for us, this means passing functions as parameters to other functions, aptly named "higher-order functions". As stated in the textbook, Scala's higher-order functions are useful as a means of creating new control structures and understanding the standard library.
 
 ## Recursive Structures
@@ -134,38 +132,8 @@ or the following fold that operates on type `String` and returns the type `Int`;
 */
 ```
 
-## Assignment
+## Assignment: Linked Lists
 
-1. (10 points) Open the `mylist` project and fill in the missing methods in the `MyList` trait and accompanying case classes. The trait includes the following methods that need to be implemented correctly:
+The assignemnt for this tutorial is filling in all the methods of a linked list structure. The assignment's source files are in the `/src/main/scala/linkedlist` directory, while the tests are all in the `src/test/scala/LinkedListSpec.scala` file. There are more tests here than in the previous projects; so take a while reading about every method.
 
-```scala
-trait MyList[T] {
-  def head: T
-  def tail: MyList[T]
-  def length: Int
-  def take(n: Int): MyList[T]
-  def drop(n: Int): MyList[T]
-  def map[U](fn: T => U): MyList[U]
-  def flatMap[U](fn: T => MyList[U]): MyList[U]
-  def filter(pred: T => Boolean): MyList[T]
-  def append(other: MyList[T]): MyList[T]
-  def foldLeft[U](start: U)(fn: (U, T) => U): U
-  def foldRight[U](start: U)(fn: (T, U) => U): U
-}
-```
-
-These methods should behave exactly like the ones in the `List` class in Scala. If you have any qualms about this class, read the documentation given in the `MyList.scala` file, and try their Scala counterparts out in the Scala console. Chapter 16 of the textbook talks more about this specific topic.
-
-2. (5 points) Open the `bintree` project and fill in the missing methods `map`, `foreach` and `fold` in the `BinTree` trait:
-
-```scala
-trait BinTree[T] {
-  def head: T
-  def children: List[T]
-  def map[U](fn: T => U): BinTree[U]
-  def foreach[U](fn: T => Unit): Unit
-  def fold[U](start: U)(fn: T => U): U
-}
-```
-
-This is a project similar to the previous one, but with a different kind of structure underneath. Try to follow the same logic as above, and change only the parts that have to do with the structure itself.
+The methods in the `linkedlist` implementation should behave exactly like the ones in the `List` class in Scala. If you have any qualms about this class, read the documentation given in the `LinkedList.scala` file, and try their Scala counterparts out in the Scala console. **Chapter 16** of the textbook talks more about this specific topic.

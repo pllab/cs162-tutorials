@@ -132,8 +132,14 @@ or the following fold that operates on type `String` and returns the type `Int`;
 */
 ```
 
-## Assignment: Linked Lists
+## Exercise: Linked Lists
 
-The assignemnt for this tutorial is filling in all the methods of a linked list structure. The assignment's source files are in the `/src/main/scala/linkedlist` directory, while the tests are all in the `src/test/scala/LinkedListSpec.scala` file. There are more tests here than in the previous projects; so take a while reading about every method.
+The exercise for this tutorial is filling in all the methods of a linked list structure. The source files are in the `/src/main/scala/linkedlist` directory, while the tests are all in the `src/test/scala/LinkedListSpec.scala` file. There are more tests here than in the previous projects; so take a while reading about every method's comments and tests.
 
 The methods in the `linkedlist` implementation should behave exactly like the ones in the `List` class in Scala. If you have any qualms about this class, read the documentation given in the `LinkedList.scala` file, and try their Scala counterparts out in the Scala console. **Chapter 16** of the textbook talks more about this specific topic.
+
+The exercise is successful when all the tests from this project light up green. To run only the specific tests for this project, use the following in the SBT console:
+
+```sbt
+sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.linkedlist.LinkedListSpec
+```

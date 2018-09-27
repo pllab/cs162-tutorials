@@ -50,7 +50,7 @@ sbt:hello-world>
 
 #### Testing your code
 
-The assignment template you have contains a test suite which we will use to grade your assignment. You can use `test` command in the sbt shell to run all the tests:
+The assignment template you have contains a test suite which we will use to grade your assignment. You can find the test code in `src/main/scala` directory. Whenever you feel stuck about understanding the expected functionality in a specific part of the assignment, refer to the relevant tests. You can use `test` command in the sbt shell to run all the tests:
 
 ```sbt
 sbt:cs162-tutorials> test
@@ -79,7 +79,7 @@ sbt:cs162-tutorials> test
 sbt:cs162-tutoarials>
 ```
 
-If you want to focus on only a subset of the tests, you can use `testOnly TEST-SUITE-CLASS` to run a specific test suite:
+If you want to focus on only a subset of the tests, you can use `testOnly TEST-SUITE-CLASS` to run a specific test:
 
 ```sbt
 sbt:cs162-tutorials> testOnly cs162.tutorials.calculator.HardSpec

@@ -1,4 +1,4 @@
-# Setup
+# Course Setup
 
 For this class, you will use SBT as a platform to compile, run, and test Scala programs. It includes a package manager to automatically download required libraries, and we have provided an already-configured SBT template for your use as described below. SBT also includes a console which allows you to interactively try out Scala code without requiring you to write it to a file and compile it first. Scala and SBT are already installed on all CSIL machines.
 

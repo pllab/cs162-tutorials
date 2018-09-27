@@ -11,16 +11,16 @@ development using unit tests.
 First, clone this repository and make sure that you are in the root
 directory of your clone when you are following the instructions.
 
-There are four tutorials in `docs/` directory in Markdown format. You
-can read them on GitHub in nicely formatted way (just like how this
+There are four tutorials in the `docs/` directory in Markdown format. You
+can read them on GitHub in a nicely formatted way (just like how this
 README document looks), or you can open the files in your favorite
 text editor to read the Markdown source.
 
 The assignment is to go through the tutorials and to do the exercises
-spread out on tutorials. The exercises get incrementally difficult so
+contained in the tutorials. The exercises get increasingly more difficult, so
 start with the first tutorial and don't get surprised when the later
-exercises start feeling difficult. Try getting adjusted to functional
-programming mindset and don't be shy to ask questions if you get
+exercises start feeling difficult. Try to get adjusted to the functional
+programming mindset and don't be shy about asking questions if you get
 stuck.
 
 ## Grading

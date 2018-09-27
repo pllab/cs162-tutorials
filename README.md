@@ -8,8 +8,8 @@ development using unit tests.
 
 ## The assignment
 
-First, clone this repository and follow all the instructions from the
-root directory of your clone.
+First, clone this repository and make sure that you are in the root
+directory of your clone when you are following the instructions.
 
 There are four tutorials in `docs/` directory in Markdown format. You
 can read them on GitHub in nicely formatted way (just like how this

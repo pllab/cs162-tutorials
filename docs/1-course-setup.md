@@ -177,29 +177,13 @@ By default, the REPL allows only single lines of code, and evaluates the code af
 
 ## Assignment
 
-The first assignment has four tutorials all together. These tutorials correspond to the four projects within `src/main/scala`.
-
-```tree
-.
-├── introduction
-│   ├── Course.scala
-│   └── UniversityStandard.scala
-└── linkedlist
-|   └── LinkedList.scala
-├── calc
-│   └── Expr.scala
-└── functional
-    ├── Factorial.scala
-    └── ListProblems.scala
-```
-
-The first assignment (`introduction`) is a project that contains only a simple class with missing method implementations (`???`) that need to be filled in. This project will teach you how to read the code and work with tests, and get comfortable with SBT and Scala in your favorite editor (no, really, use **sublime text**). 
+The first assignment (`introduction`) is a project that contains only two simple classes with missing method implementations (`???`) that need to be filled in. This project will teach you how to read the code and work with tests, and get comfortable with SBT and Scala in your favorite editor (no, really, use **sublime text**). The source code is in `src/main/scala/introduction`, while the tests are in `src/test/scala/IntroductionSpec.scala`.
 
 To run only tests for the `introduction` project, you can run:
 ```sbt
 sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.introduction.*
 ```
-This will produce seven failed tests that you need to fix. The associated test file is `src/test/scala/IntroductionSpec.scala`. The tests there contain some useful comments for you to start with. Remember to use the SBT REPL for situations where you're not too sure of how something works, and don't want to recompile the project until it works!
+The tests there contain some useful comments for you to start with. Remember to use the SBT REPL for situations where you're not too sure of how something works, and don't want to recompile the project until it works!
 
 This first project isn't meant to be a real challenge, and should take little time. It also only tests your knowledge of some very basic Scala concepts and serves to get your spirits up once all the tests start glowing green! The actual practical assignments start with the second tutorial. In short, here are the topics that the first assignment covers, in full:
 

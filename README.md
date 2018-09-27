@@ -8,6 +8,9 @@ development using unit tests.
 
 ## The assignment
 
+First, clone this repository and follow all the instructions from the
+root directory of your clone.
+
 There are four tutorials in `docs/` directory in Markdown format. You
 can read them on GitHub in nicely formatted way (just like how this
 README document looks), or you can open the files in your favorite
@@ -30,6 +33,10 @@ you must not use any of:
     - `Array` data type.
 
 If you use any mutation, you will automatically fail the assignment.
+
+Your code must compile. Invoking `compile` and `test:compile` on SBT
+console must succeed. Otherwise, you will automatically fail the
+assignment.
 
 To grade your assignment, we will make sure that the unit tests are
 not tampered with and your grade will be in proportion to the number

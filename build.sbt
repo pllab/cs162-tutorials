@@ -18,6 +18,4 @@ scalacOptions ++= Seq("-deprecation", "-feature")
 
 initialCommands in consoleQuick := ""
 
-// Required so that tests that are timed out using Timeout will have their
-// threads terminated when testing is finished.
 fork in Test := true

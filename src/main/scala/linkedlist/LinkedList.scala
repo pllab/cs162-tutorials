@@ -85,39 +85,29 @@ case class Node[T](value: T, rest: LinkedList[T]) extends LinkedList[T] {
 
 // An empty implementation of LinkedList[T]
 case class Empty[T]() extends LinkedList[T] {
-  def head: T =
-    throw new Exception("Empty list does not have a head!")
+  def head: T = throw new Exception("Empty list does not have a head!")
 
-  def safeHead: Option[T] =
-    None
+  def safeHead: Option[T] = None
 
-  def tail: LinkedList[T] =
-    Empty[T]()
+  def tail: LinkedList[T] = Empty[T]()
 
-  def length: Int =
-    0
+  def length: Int = 0
 
-  def take(n: Int): LinkedList[T] = // ???
+  def take(n: Int): LinkedList[T] =
     if(n > 0) throw new Exception(s"Empty list does not have ${n} elements to take!") else Empty[T]()
 
-  def drop(n: Int): LinkedList[T] = // ???
+  def drop(n: Int): LinkedList[T] =
     if(n > 0) throw new Exception(s"Empty list does not have ${n} elements to drop!") else Empty[T]()
 
-  def map[U](fn: T => U): LinkedList[U] = // ???
-    Empty[U]()
+  def map[U](fn: T => U): LinkedList[U] = Empty[U]()
 
-  def flatMap[U](fn: T => LinkedList[U]): LinkedList[U] = // ???
-    Empty[U]()
+  def flatMap[U](fn: T => LinkedList[U]): LinkedList[U] = Empty[U]()
 
-  def filter(pred: T => Boolean): LinkedList[T] = // ???
-    Empty[T]()
+  def filter(pred: T => Boolean): LinkedList[T] = Empty[T]()
 
-  def append(other: LinkedList[T]): LinkedList[T] = // ???
-    other
+  def append(other: LinkedList[T]): LinkedList[T] = other
 
-  def foldLeft[U](start: U)(fn: (U, T) => U): U = // ???
-    start
+  def foldLeft[U](start: U)(fn: (U, T) => U): U = start
 
-  def foldRight[U](start: U)(fn: (T, U) => U): U = // ???
-    start
+  def foldRight[U](start: U)(fn: (T, U) => U): U = start
 }

@@ -6,7 +6,7 @@ In this assignment, you will familarize yourself with Scala, learn how
 to use the tools in Scala ecosystem and get used to test-driven
 development using unit tests.
 
-## The assignment
+## Exercises
 
 First, clone this repository and make sure that you are in the root
 directory of your clone when you are following the instructions.
@@ -57,7 +57,7 @@ assignment, on the root directory of the repository you cloned,
        submitting carefully and submit the assignment only if you are
        sure that you are submitting all the files.
 
-## General tips
+## General Tips
 
 - Start early. There is quite a bit of material to go through.
 - If you get stuck, go through the relevant parts of the

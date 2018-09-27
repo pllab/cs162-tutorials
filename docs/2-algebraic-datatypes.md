@@ -78,8 +78,9 @@ In the `src/main/scala/calc` folder, the `Expr.scala` file is the one you'll hav
 ```sbt
 sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.calc.*
 ```
+The corresponding tests are in the `src/test/scala/CalcSpec.scala`. Read them carefully and try to work from there, as you did with the first tutorial. 
 
-First, take care of `Calculator.simplifyHead`. This method simplifies certain patterns, where possible. The method has the following signature:
+To finish this task, take care of `Calculator.simplifyHead` first. This method simplifies certain patterns, where possible. The method has the following signature:
 ```scala
 object Calculator {
   def simplifyHead(expr: Expr): Expr = ???

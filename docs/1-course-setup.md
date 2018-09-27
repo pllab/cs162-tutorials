@@ -138,7 +138,7 @@ You can also use `testQuick` command to run only the tests that failed in the la
 
 ## Opening a Scala interpreter Read-Eval-Print-Loop (REPL)
 
-A **Read–Eval–Print Loop** (REPL), (interactive shell or interpreter shell) is a simple, interactive programming environment that takes user inputs, evaluates them, and returns the result to the user. Type `console` and hit enter inside the SBT shell to run an interactive Scala console. If your code doesn't compile (and this stops `console` from working), try typing `consoleQuick` to skip compiling and just go to the REPL.
+A **Read–Eval–Print Loop** (REPL, interactive shell or interpreter shell) is a simple, interactive programming environment that takes user inputs, evaluates them, and returns the result to the user. Type `console` and hit enter inside the SBT shell to run an interactive Scala console. If your code doesn't compile (and this stops `console` from working), try typing `consoleQuick` to skip compiling and just go to the REPL.
 
 ```sbt
 sbt:tutorials> console

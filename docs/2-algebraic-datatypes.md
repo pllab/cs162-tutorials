@@ -71,7 +71,7 @@ This type of recursion is called **structural recursion**, due to the fact that 
 
 One benefit of using structural recursion is _self-similarity_. If a function is defined to work on an `Expr`, it can then be applied to any part of a complex expression simply by calling it on that expression's parts that, themselves, are `Expr` as well.
 
-## Assignment: Expression Simplification and Evaluation
+## Exercise: Expression Simplification and Evaluation
 
 In the `src/main/scala/calc` folder, the `Expr.scala` file is the one you'll have to edit. Fill in the `Calculator.simplifyHead` and `Calculator.evaluate` methods. You can run the calculator tests only by running:
 

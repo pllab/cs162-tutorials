@@ -1,7 +1,5 @@
 # Algebraic Data Types
 
-> Note: this tutorial assumes that you've read and understood the "Programming in Scala (3rd Edition)" textbook chapters 2--7 and chapter 15. If you haven't, go and review this material. This tutorial is based on the material in the textbook, but will specifically discuss ways in which we use Scala in this course. It might be helpful when reading through the textbook to keep a Scala REPL open (as discussed in part 1 of the tutorial) so that you can interactively try out code.
-
 Algebraic data types are composite types, most often **products**, **sums** and **functions**, that we create by combining two types `A` and `B` in the following ways:
 
 - A product of types `A` and `B` is a type `(A, B)` that contains both a value of type `A` and a value of type `B`. These are also called _tuples_ (for products with an arbitrary number of elements) or _pairs_ (for products with exactly two elements). They are somewhat like C/C++ structs, except without explicit names for each element.
@@ -20,7 +18,7 @@ Sum types denote disjoint values. We'll be using the same running example as the
 Expr = Var(String) | Num(Double) | UnOp(String, Expr) | BinOp(String, Expr, Expr)
 ```
 
-In Scala, sum types can be expressed using traits and case classes. Examples of this are given in chapter 15 of the book.
+In Scala, sum types can be expressed using traits and case classes. Examples of this are given in **chapter 15** of the book.
 
 ```scala
 sealed trait Expr
@@ -73,31 +71,39 @@ This type of recursion is called **structural recursion**, due to the fact that 
 
 One benefit of using structural recursion is _self-similarity_. If a function is defined to work on an `Expr`, it can then be applied to any part of a complex expression simply by calling it on that expression's parts that, themselves, are `Expr` as well.
 
-## Assignment: Expression Simplification
+## Assignment: Expression Simplification and Evaluation
 
-Open the `calculator` project locally, and the `Expr.scala` file in the `src/main/scala` directory. Fill in the `simplifyExpr` method for the above `Expr` trait and its case classes. The `simplifyExpr` function works by recognizing some familiar patterns and reducing them to simpler ones.
+In the `src/main/scala/calc` folder, the `Expr.scala` file is the one you'll have to edit. Fill in the `Calculator.simplifyHead` and `Calculator.evaluate` methods. You can run the calculator tests only by running:
 
-You will need to take care of these three cases, and more, as listed below:
-1. (1 point) the expression `-(-n)` should become `n`, regardless of what type of expression `n` is
-2. (1 point) the expression `0 + x` should become `x`, regardless of what type of expression `x` is
-3. (1 point) the expression `1 * x` should become `x`, regardless of what type of expression `x` is
-4. (1 point) the expression `0 * x` should become `0`, regardless of what type of expression `x` is
-5. (1 point) the expression `x - x` should become `0`, regardless of what type of expression `x` is
-6. (2 points) for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Num(2), Num(3))` should evaluate to `Num(5)`.
-7. (3 points) the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Num(7))` should be simplified to `BinOp("+", Num(7), Num(7))`.
-
-Once you have modified the `Expr.scala` files appropriately, go to the SBT shell and type `testOnly cs162.tuts.calculator.simplifyExpr` (or, using regular expressions, `testOnly *simplifyExpr`) to test the `simplifyExpr` functionality. You can run _all_ the tests for this project by simply running `test` as shown in the first tutorial.
-
-8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
-
-```scala
-sealed trait Expr {
-  def evaluate: Double
-}
+```sbt
+sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.calc.*
 ```
 
-The goal of this method is to evaluate a certain expression down to a single number. Include the binary operations `+`, `-` and `*`, as well as the unary operation `-`. Read chapter 14 of the text book to get a handle of tests and assertions and write your own tests for this method to submit with the code. All variables should evaluate to **1** in all operations (since we haven't specified assignment yet in our little arithmetic expression language). An example of `evaluate` would be:
+First, take care of `Calculator.simplifyHead`. This method simplifies certain patterns, where possible. The method has the following signature:
+```scala
+object Calculator {
+  def simplifyHead(expr: Expr): Expr = ???
+  ...
+}
+```
+You will need to take care of these three cases, and more, as listed below:
+1. the expression `-(-n)` should become `n`, regardless of what type of expression `n` is
+2. the expression `0 + x` should become `x`, regardless of what type of expression `x` is
+3. the expression `1 * x` should become `x`, regardless of what type of expression `x` is
+4. the expression `0 * x` should become `0`, regardless of what type of expression `x` is
+5. the expression `x - x` should become `0`, regardless of what type of expression `x` is
+6. for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Num(2), Num(3))` should evaluate to `Num(5)`.
+7. the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Num(7))` should be simplified to `BinOp("+", Num(7), Num(7))`.
 
+After all the tests that have to do with `simplifyHead` are done, only the `evaluate` tests
+
+8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
+```scala
+object Calculator {
+  def evaluate(expr: Expr): Double = ???
+}
+```
+The goal of this method is to evaluate a certain expression down to a single number. Include the binary operations `+`, `-` and `*`, as well as the unary operation `-`. Read chapter 14 of the text book to get a handle of tests and assertions and write your own tests for this method to submit with the code. All variables should evaluate to **1** in all operations (since we haven't specified assignment yet in our little arithmetic expression language). An example of `evaluate` would be:
 ```scala
 evaluate(Num(100))
 // results in 100

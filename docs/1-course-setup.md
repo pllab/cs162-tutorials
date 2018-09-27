@@ -74,7 +74,7 @@ sbt:tutorials>
 
 ### Testing your code
 
-Once you're finished with writing code in your editor (or _before_ you start writing, even), you might want to run the test suites, to see what has to be done. These tests are used for grading, so take this part seriously. You can find the test code in `src/test/scala` directory. Whenever you feel stuck about understanding the expected functionality in a specific part of the assignment, refer to the relevant tests. You can use the `test` command in the SBT shell to run all the tests:
+Once you're finished with writing code in your editor (or _before_ you start writing, even), you might want to run the test suites, to see what has to be done. These tests are used for grading, so take this part seriously. You can find the test code in `src/test/scala` directory. Whenever you feel stuck about understanding the expected functionality in a specific part of the assignment, refer to the relevant tests. Tests are organized in spec (short for specification), as described in **chapter 14**. You can use the `test` command in the SBT shell to run all the tests:
 
 ```sbt
 sbt:tutorials> test

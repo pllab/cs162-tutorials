@@ -95,7 +95,9 @@ You will need to take care of these three cases, and more, as listed below:
 6. for two _numbers_ `n` and `m`, the expressions `n + m`, `n - m` and `n * m` should evaluate to a single number with the respective values of the sum, subtraction and multiplication of the `n` and `m`. For example, the expression `BinOp("+", Num(2), Num(3))` should evaluate to `Num(5)`.
 7. the variable with the name *DUP* is to be treated as a duplicate of whatever other operand is, if appearing in a binary operation, except if the other operand is also this *DUP* variable, in which case they both have the numeric value `0` and should be simplified accordingly. For example, the expression `BinOp("+", Var("DUP"), Num(7))` should be simplified to `BinOp("+", Num(7), Num(7))`.
 
-After all the tests that have to do with `simplifyHead` are done, only the `evaluate` tests
+Examples of running the `simplifyHead` method can be found in the test file. Pay close attention to these!
+
+After all the tests that have to do with `simplifyHead` are done, only the `evaluate` tests remain.
 
 8. The `evaluate` method has the following signature:
 ```scala

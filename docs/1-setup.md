@@ -203,9 +203,12 @@ This will produce seven failed tests that you need to fix. The associated test f
 
 This first project isn't meant to be a real challenge, and should take little time. It also only tests your knowledge of some very basic Scala concepts and serves to get your spirits up once all the tests start glowing green! The actual practical assignments start with the second tutorial. In short, here are the topics that the first assignment covers, in full:
 
-**Tutorial 1**: Introduction -- basic Scala and SBT workflow;
+**Tutorial 1**: Introduction -- basic Scala and SBT workflow
+
 **Tutorial 2**: Algebraic Data Types -- use of algebraic data types in implementation of programming language concepts;
+
 **Tutorial 3**: Higher-Order Programming -- structural recursion, traversals and folds as the basis of functional programming;
+
 **Tutorial 4**: Review Exercises -- some harder problems that can be solved with a bit of work if one finished tutorials 1-3 successfully.
 
 The projects will be graded by looking at the passed tests. You may **not** remove any tests, but may write your own tests in. This is something that isn't mandatory for this assignment, but will be a useful practice going forward. 

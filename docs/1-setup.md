@@ -67,9 +67,9 @@ Several things will be different from user to user, depending on where the root 
 You can now compile the current project by typing `compile`, and test it by typing `test` into the SBT shell. The `compile` command will compile any source code files found in `src/main/scala/`. 
 
 ```sbt
-sbt:hello-world> compile
+sbt:tutorials> compile
 [success] Total time: 1 s, completed Sep 12, 2018 1:58:59 AM
-sbt:hello-world>
+sbt:tutorials>
 ```
 
 ### Testing your code
@@ -133,6 +133,8 @@ sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.introduction.*
 [info] ...
 ```
 You can also use `testQuick` command to run only the tests that failed in the last run. After changing things around (in your editor, you know, **vim**), this is a fast way to check if you fixed something or made it worse.
+
+> You will find many places in the Scala classes where some piece of code is simply marked as `???`. This is a piece of Scala type-magic that allows us to compile the code _without_ implementing a particular piece. Whenever you see a `???`, you will have to fill it in, or your code won't be able to run once we try to grade it.
 
 ## Opening a Scala interpreter Read-Eval-Print-Loop (REPL)
 

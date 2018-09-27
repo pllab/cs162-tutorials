@@ -185,7 +185,9 @@ sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.introduction.*
 ```
 The tests there contain some useful comments for you to start with. Remember to use the SBT REPL for situations where you're not too sure of how something works, and don't want to recompile the project until it works!
 
-This first project isn't meant to be a real challenge, and should take little time. It also only tests your knowledge of some very basic Scala concepts and serves to get your spirits up once all the tests start glowing green! The actual practical assignments start with the second tutorial. In short, here are the topics that the first assignment covers, in full:
+### What next?
+
+This first assignment isn't meant to be a real challenge, and should take little time. It also only tests your knowledge of some very basic Scala concepts and serves to get your spirits up once all the tests start glowing green! The actual practical assignments start with the second tutorial. In short, here are the topics that the full week 1 project covers, in full:
 
 **Tutorial 1**: Introduction -- basic Scala and SBT workflow
 
@@ -193,6 +195,8 @@ This first project isn't meant to be a real challenge, and should take little ti
 
 **Tutorial 3**: Higher-Order Programming -- structural recursion, traversals and folds as the basis of functional programming;
 
-**Tutorial 4**: Review Exercises -- some harder problems that can be solved with a bit of work if one finished tutorials 1-3 successfully.
+**Tutorial 4**: Functional Problems -- some functional problems that can be solved with a bit of work if one finished tutorials 1-3 successfully.
 
 The projects will be graded by looking at the passed tests. You may **not** remove any tests, but may write your own tests in. This is something that isn't mandatory for this assignment, but will be a useful practice going forward. 
+
+Good luck!

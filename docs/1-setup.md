@@ -2,7 +2,7 @@
 
 For this class, you will use SBT as a platform to compile, run, and test Scala programs. It includes a package manager to automatically download required libraries, and we have provided an already-configured SBT template for your use as described below. SBT also includes a console which allows you to interactively try out Scala code without requiring you to write it to a file and compile it first. Scala and SBT are already installed on all CSIL machines.
 
-### Project Basics
+## Project Basics
 
 After making sure that git and SBT is installed on the machine you are using, you need to clone this repository. Execute the following command to clone this repository and have a copy of the assignment you can work on:
 
@@ -13,16 +13,34 @@ git clone https://github.com/pllab/cs162-tutorials.git
 After running the command above, you will have a directory called `cs162-tutorials`. Henceforth, we will refer to that directory as the root directory of this assignment. The assignment has the following directory structure:
 
 ```
-TODO: update the directory structure
-hello-world
+.
 ├── build.sbt
+├── docs
+│   ├── 1-setup.md
+│   ├── 2-algebraic-datatypes.md
+│   ├── 3-higher-order-programming.md
+│   └── 4-specific-problems.md
+├── README.md
 └── src
     ├── main
-    │   └── scala
-    │       └── Main.scala
+    │   └── scala
+    │       ├── introduction
+    │       │   ├── Course.scala
+    │       │   └── UniversityStandard.scala
+    │       ├── calc
+    │       │   └── Expr.scala
+    │       └── linkedlist
+    │       |   └── LinkedList.scala
+    │       └── functional
+    │           ├── Factorial.scala
+    │           └── ListProblems.scala
     └── test
         └── scala
-            └── EmptySpec.scala
+            ├── CalcSpec.scala
+            ├── FactorialSpec.scala
+            ├── IntroductionSpec.scala
+            ├── LinkedListSpec.scala
+            └── ListProblemsSpec.scala
 ```
 
 The `docs` directory contains the tutorial text and the rest of the directory structure is the default directory structure expected by SBT and contains the **build file** (`build.sbt`) and the **source** directory (`src`). The source directory contains two further directories: `main` and `test`, that respectively hold the code for the project itself and the code for project tests.
@@ -31,162 +49,162 @@ SBT can handle projects that combine multiple languages, which is why both the `
 
 Run `sbt` from the command line inside the root directory of the assignment. This command opens the interactive SBT shell. The interactive shell will be useful to have around, so be sure to keep it open all the time while developing your program.
 
-The usual Scala development environment includes an **editor** of your choice to write the code in (we recommend emacs, which has a Scala mode available, but you can use anything you want), and the **SBT shell**. In this tutorial we distinguish the terminal prompt from the SBT shell prompt by prefixing the SBT shell prompt with your project name:
+The usual Scala development environment includes an **editor** of your choice to write the code in (we recommend **emacs**, which has a Scala mode available, but you can use anything you want), and the **SBT shell**. In this tutorial we distinguish the terminal prompt from the SBT shell prompt by prefixing the SBT shell prompt with your project name. 
+
+To open the SBT shell, open the terminal, navigate to the root directory and type "sbt". The output of this command will look similar to the following:
 
 ```bash
 > sbt
-TODO:update
-sbt:hello-world>
+[info] Loading project definition from /home/mika/Projects/cs162-tutorials/project
+[info] Loading settings from build.sbt ...
+[info] Set current project to tutorials (in build file:/home/mika/Projects/cs162-tutorials/)
+[info] sbt server started at local:///home/mika/.sbt/1.0/server/c4ca5aec08569b3746c7/sock
+sbt:tutorials> 
 ```
 
-You can now compile the current project by typing `compile`, and test it by typing `test` into the sbt shell. The `compile` command will compile any source code files found in `src/main/scala/`. The `test` command will compile any source code files found in `src/test/scala/` and execute all tests in those files.
+Several things will be different from user to user, depending on where the root directory is and what your username is. The new shell, denoted by `sbt:tutorials>` is the prompt of the SBT shell.
+
+You can now compile the current project by typing `compile`, and test it by typing `test` into the SBT shell. The `compile` command will compile any source code files found in `src/main/scala/`. 
 
 ```sbt
-TODO:update
 sbt:hello-world> compile
 [success] Total time: 1 s, completed Sep 12, 2018 1:58:59 AM
 sbt:hello-world>
 ```
 
-#### Testing your code
+### Testing your code
 
-The assignment template you have contains a test suite which we will use to grade your assignment. You can find the test code in `src/main/scala` directory. Whenever you feel stuck about understanding the expected functionality in a specific part of the assignment, refer to the relevant tests. You can use `test` command in the sbt shell to run all the tests:
+Once you're finished with writing code in your editor (or _before_ you start writing, even), you might want to run the test suites, to see what has to be done. These tests are used for grading, so take this part seriously. You can find the test code in `src/test/scala` directory. Whenever you feel stuck about understanding the expected functionality in a specific part of the assignment, refer to the relevant tests. You can use the `test` command in the SBT shell to run all the tests:
 
 ```sbt
-sbt:cs162-tutorials> test
-[info] - should distribute addition -- a(b + c) = ab + ac *** FAILED ***
-[info]   Exception was thrown during property evaluation.
-[info]     Message: Implement the rest here.
-[info]     Occurred when passed generated values (
-[info]       arg0 = 0, // 1 shrink
-[info]       arg1 = 0, // 1 shrink
-[info]       arg2 = 0 // 1 shrink
-[info]     )
-...    <many more lines showing test results>
+sbt:tutorials> test
+[info] Updating ...
+[info] Done updating.
+[info] Compiling 6 Scala sources to /home/mika/Projects/cs162-tutorials/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 5 Scala sources to /home/mika/Projects/cs162-tutorials/target/scala-2.12/test-classes ...
+[info] Done compiling.
+[info] FactorialSpec:
+[info] The factorial of N
+[info] - should be the product of all the numbers from 1 to N *** FAILED ***
+[info]   scala.NotImplementedError: an implementation is missing
+[info]   at scala.Predef$.$qmark$qmark$qmark(Predef.scala:284)
+[info]   at edu.ucsb.cs.cs162.tuts.functional.Factorial$.iter$1(Factorial.scala:23)
+[info]   at edu.ucsb.cs.cs162.tuts.functional.Factorial$.apply(Factorial.scala:25)
+[info]   at edu.ucsb.cs.cs162.tuts.functional.FactorialSpec.$anonfun$new$1(FactorialSpec.scala:17)
+[info] ...
 [info] ScalaTest
-[info] Run completed in 425 milliseconds.
-[info] Total number of tests run: 21
-[info] Suites: completed 3, aborted 0
-[info] Tests: succeeded 2, failed 19, canceled 0, ignored 0, pending 0
-[info] *** 19 TESTS FAILED ***
-[error] Failed: Total 21, Failed 19, Errors 0, Passed 2
+[info] Run completed in 2 seconds, 56 milliseconds.
+[info] Total number of tests run: 49
+[info] Suites: completed 6, aborted 0
+[info] Tests: succeeded 10, failed 39, canceled 0, ignored 0, pending 0
+[info] *** 39 TESTS FAILED ***
+[error] Failed: Total 49, Failed 39, Errors 0, Passed 10
 [error] Failed tests:
-[error]         cs162.tutorials.calculator.HardSpec
-[error]         cs162.tutorials.calculator.ToMathSpec
-[error]         cs162.tutorials.calculator.EvaluationSpec
+[error] 	edu.ucsb.cs.cs162.tuts.functional.FactorialSpec
+[error] 	edu.ucsb.cs.cs162.tuts.linkedlist.LinkedListSpec
+[error] 	edu.ucsb.cs.cs162.tuts.functional.ListProblemsSpec
+[error] 	edu.ucsb.cs.cs162.tuts.introduction.CourseSpec
+[error] 	edu.ucsb.cs.cs162.tuts.calc.EvaluateSpec
+[error] 	edu.ucsb.cs.cs162.tuts.calc.SimplifyHeadSpec
 [error] (Test / test) sbt.TestsFailedException: Tests unsuccessful
-[error] Total time: 1 s, completed Sep 26, 2018 9:29:29 PM
-sbt:cs162-tutoarials>
+[error] Total time: 9 s, completed Sep 27, 2018 2:14:06 AM
 ```
+Don't be frightened by this output! Read the lines that start with "- should..." to see which tests failed. These tests can be found in the appropriate file in the `/src/test/scala` folder.
 
-If you want to focus on only a subset of the tests, you can use `testOnly TEST-SUITE-CLASS` to run a specific test:
+If you want to focus on only a subset of the tests, you can use `testOnly TEST-SUITE-CLASS` to run a specific test. The `TEST-SUITE-CLASS` is a namespace or class name, for example:
 
 ```sbt
-sbt:cs162-tutorials> testOnly cs162.tutorials.calculator.HardSpec
-[info] HardSpec:
-[info] Div(a, b)
-[info] - should evaluate to a / b if b != 0, and throw an exception otherwise *** FAILED ***
-[info]   Exception was thrown during property evaluation.
-[info]     Message: Implement the rest here.
-[info]     Occurred when passed generated values (
-[info]       arg0 = 0, // 1 shrink
-[info]       arg1 = -1
-[info]     )
-[info] - should evaluate to a if b == 1 *** FAILED ***
-[info]   Exception was thrown during property evaluation.
-[info]     Message: Implement the rest here.
-[info]     Occurred when passed generated values (
-[info]       arg0 = 0 // 1 shrink
-[info]     )
-[info] - should evaluate to 1 if a == b *** FAILED ***
-[info]   Exception was thrown during property evaluation.
-[info]     Message: Implement the rest here.
-[info]     Occurred when passed generated values (
-[info]       arg0 = 1 // 30 shrinks
-[info]     )
-[info] - should be stringified as (a * b) *** FAILED ***
-[info]   Exception was thrown during property evaluation.
-[info]     Message: Implement the rest here.
-[info]     Occurred when passed generated values (
-[info]       arg0 = 0,
-[info]       arg1 = 0 // 1 shrink
-[info]     )
-[info] ScalaTest
-[info] Run completed in 146 milliseconds.
-[info] Total number of tests run: 4
-[info] Suites: completed 1, aborted 0
-[info] Tests: succeeded 0, failed 4, canceled 0, ignored 0, pending 0
-[info] *** 4 TESTS FAILED ***
-[error] Failed: Total 4, Failed 4, Errors 0, Passed 0
-[error] Failed tests:
-[error]         cs162.tutorials.calculator.HardSpec
-[error] (Test / testOnly) sbt.TestsFailedException: Tests unsuccessful
-[error] Total time: 0 s, completed Sep 26, 2018 9:31:57 PM
-sbt:cs162-tutorials>
+sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.introduction.*
+[info] CourseSpec:
+[info] A course
+[info] - should tell us what its name is *** FAILED ***
+[info]   scala.NotImplementedError: an implementation is missing
+[info]   at scala.Predef$.$qmark$qmark$qmark(Predef.scala:284)
+[info]   at edu.ucsb.cs.cs162.tuts.introduction.UniversityStandard$.minimalCourseNumber$lzycompute(UniversityStandard.scala:6)
+[info]   at edu.ucsb.cs.cs162.tuts.introduction.UniversityStandard$.minimalCourseNumber(UniversityStandard.scala:6)
+[info]   at edu.ucsb.cs.cs162.tuts.introduction.Course.<init>(Course.scala:6)
+[info]   at edu.ucsb.cs.cs162.tuts.introduction.CourseSpec.$anonfun$new$2(IntroductionSpec.scala:27)
+[info]   at scala.collection.immutable.List.foreach(List.scala:389)
+[info]   at edu.ucsb.cs.cs162.tuts.introduction.CourseSpec.$anonfun$new$1(IntroductionSpec.scala:26)
+[info]   at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)
+[info]   at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+[info]   at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
+[info] ...
 ```
+You can also use `testQuick` command to run only the tests that failed in the last run. After changing things around (in your editor, you know, **vim**), this is a fast way to check if you fixed something or made it worse.
 
-You can also use `testQuick` command to run only the tests that failed in the last run.
+## Opening a Scala interpreter Read-Eval-Print-Loop (REPL)
 
-> The exact output might vary, depending on how recently the code was changed and how many dependencies have to be reloaded.
-
-No matter how large your project gets, the usage of SBT stays the same overall. There are additional commands which might be useful, including `reload` for when the build file changes, `console` to run an interactive Scala console inside SBT, and `exit` to leave SBT. Online SBT documentation is available [here](https://www.scala-sbt.org/1.x/docs/).
-
-You shouldn't have to restart SBT even once while developing your projects. If new files are added to the `src/` directory hierarchy, SBT will notice them next time you run a command and recompile with them automatically.
-
-### Scala REPL
-
-Scala contains an interactive console (otherwise known as a REPL, or read-evaluate-print-loop), where you can type valid (or invalid!) Scala expressions and get them to immediately evaluate instead of being compiled.
-
-By typing `console` into the SBT shell, we get the following:
+A **Read–Eval–Print Loop** (REPL), (interactive shell or interpreter shell) is a simple, interactive programming environment that takes user inputs, evaluates them, and returns the result to the user. Type `console` and hit enter inside the SBT shell to run an interactive Scala console. If your code doesn't compile (and this stops `console` from working), try typing `consoleQuick` to skip compiling and just go to the REPL.
 
 ```sbt
-TODO:update
-sbt:-world> console
+sbt:tutorials> console
 [info] Starting scala interpreter...
-import cs162.tutorials.hello-world._
-Welcome to Scala version 2.11.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
-Type in expressions to have them evaluated.
-Type :help for more information.
+Welcome to Scala 2.12.6 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
+Type in expressions for evaluation. Or try :help.
 
-scala>
+scala> import edu.ucsb.cs.cs162.tuts._
+
+scala> 
 ```
 
-This is yet another prompt, specifically stating that it is a pure `scala>` console. You can try out snippets of Scala code here to see what happens and how they work. This is useful when trying to figure out how to implement something and also when trying to debug code. From the REPL we can execute any Scala code directly, so we could try out any expression:
+This is yet another prompt, specifically stating that it is a pure `scala>` console. You can try out snippets of Scala code here to see what happens and how they work. This is useful when trying to figure out how to implement some functionality and also when trying to debug code. From the REPL we can execute any Scala code directly, so we could try out any expression:
 
 ```sbt
-scala> 3+3
+scala> 3 + 3
 res0: Int = 6
 
 scala>
 ```
 
-Here we are evaluating the expression `3+3`, and the REPL tells us that the result (which it names `res0`) has type `Int` and value `6`. You can use the name `res0` in later expressions if you like, the console will remember that it has value `6`.
+Here we are evaluating the expression `3 + 3`, and the REPL tells us that the result (which it names `res0`) has type `Int` and value `6`. You can use the name `res0` in later expressions if you like, the console will remember that it has value `6`.
 
 We can also try function and method calls such as `println("Hello, World!")` or `"foo".toUpperCase`. Don't be intimidated while in the console, you can try out things here with no reprecussions until you get them to work the way you want. Erroneous code will simply cause an error message. Reading those error messages is very helpful for understanding the language. Scala tries to give informative error messages, sometimes even going above and beyond the call of duty to give suggestions.
 
-We can return from this Scala REPL to the SBT one by pressing `CTRL+D`. We can exit the SBT shell by either typing `exit` or pressing `CTRL+D` again.
+We can return from this Scala REPL to the SBT one by pressing `CTRL+D`.
 
 ```sbt
-scala>      <user hits CTRL+D>
+scala> [user hits CTRL+D]
 [success] Total time: 5032 s, completed Sep 12, 2018 2:27:04 AM
-sbt:cs162-tutorials> exit
-[info] shutting down server
 ```
 
 ### A note on multiline code in the Scala REPL
 
 By default, the REPL allows only single lines of code, and evaluates the code after each line you enter. To write (or copy and paste) multiple lines into the REPL, type `:paste` in the SBT shell. Doing so will enter a multiline mode where expressions aren't evaluated until you press `CTRL+D`.
 
-The `console` command will automatically compile any source code in your project and make it available for you to use in the Scala REPL. If you don't want this to happen (for example, your project code is currently broken and doesn't compile), use `consoleQuick` instead. This will enter a Scala REPL without compiling your project (but neither will it be available for you to use).
+## Assignment
 
-## Asciicast
+The first assignment has four tutorials all together. These tutorials correspond to the four projects within `src/main/scala`.
 
-To see all of this in practice, follow this asciicast for a step-by-step illustration of the process, done on a CSIL machine.
+```tree
+.
+├── introduction
+│   ├── Course.scala
+│   └── UniversityStandard.scala
+└── linkedlist
+|   └── LinkedList.scala
+├── calc
+│   └── Expr.scala
+└── functional
+    ├── Factorial.scala
+    └── ListProblems.scala
+```
 
-TODO:update asciicast
+The first assignment (`introduction`) is a project that contains only a simple class with missing method implementations (`???`) that need to be filled in. This project will teach you how to read the code and work with tests, and get comfortable with SBT and Scala in your favorite editor (no, really, use **sublime text**). 
 
-[![asciicast](https://asciinema.org/a/202735.png)](https://asciinema.org/a/202735)
+To run only tests for the `introduction` project, you can run:
+```sbt
+sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.introduction.*
+```
+This will produce seven failed tests that you need to fix. The associated test file is `src/test/scala/IntroductionSpec.scala`. The tests there contain some useful comments for you to start with. Remember to use the SBT REPL for situations where you're not too sure of how something works, and don't want to recompile the project until it works!
 
-## Conclusion
+This first project isn't meant to be a real challenge, and should take little time. It also only tests your knowledge of some very basic Scala concepts and serves to get your spirits up once all the tests start glowing green! The actual practical assignments start with the second tutorial. In short, here are the topics that the first assignment covers, in full:
 
-At this point, you should be able to use SBT to compile, run, and test your Scala code and to enter the Scala REPL to try out Scala code interactively.
+```
+Tutorial 1 -- Introduction: basic Scala and SBT workflow;
+Tutorial 2 -- Algebraic Data Types: use of algebraic data types in implementation of programming language concepts;
+Tutorial 3 -- Higher-Order Programming: structural recursion, traversals and folds as the basis of functional programming;
+TUtorial 4 -- Review Exercises: some harder problems that can be solved with a bit of work if one finished tutorials 1-3 successfully.
+```
+The projects will be graded by looking at the passed tests. You may **not** remove any tests, but may write your own tests in. This is something that isn't mandatory for this assignment, but will be a useful practice going forward. 

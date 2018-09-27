@@ -1,5 +1,5 @@
 
-package edu.ucsb.cs.cs162.tuts.calc
+package edu.ucsb.cs.cs162.tuts.calculator
 
 import scala.language.reflectiveCalls
 import org.scalatest._

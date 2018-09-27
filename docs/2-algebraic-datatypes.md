@@ -73,12 +73,12 @@ One benefit of using structural recursion is _self-similarity_. If a function is
 
 ## Exercise: Expression Simplification and Evaluation
 
-In the `src/main/scala/calc` folder, the `Expr.scala` file is the one you'll have to edit. Fill in the `Calculator.simplifyHead` and `Calculator.evaluate` methods. You can run the calculator tests only by running:
+In the `src/main/scala/calculator` folder, the `Expr.scala` file is the one you'll have to edit. Fill in the `Calculator.simplifyHead` and `Calculator.evaluate` methods. You can run the calculator tests only by running:
 
 ```sbt
-sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.calc.*
+sbt:tutorials> testOnly edu.ucsb.cs.cs162.tuts.calculator.*
 ```
-The corresponding tests are in the `src/test/scala/CalcSpec.scala`. Read them carefully and try to work from there, as you did with the first tutorial. 
+The corresponding tests are in the `src/test/scala/CalculatorSpec.scala`. Read them carefully and try to work from there, as you did with the first tutorial. 
 
 To finish this task, take care of `Calculator.simplifyHead` first. This method simplifies certain patterns, where possible. The method has the following signature:
 ```scala
@@ -107,16 +107,16 @@ object Calculator {
 ```
 The goal of this method is to evaluate a certain expression down to a single number. Include the binary operations `+`, `-` and `*`, as well as the unary operation `-`. Read chapter 14 of the text book to get a handle of tests and assertions and write your own tests for this method to submit with the code. All variables should evaluate to **1** in all operations (since we haven't specified assignment yet in our little arithmetic expression language). An example of `evaluate` would be:
 ```scala
-evaluate(Num(100))
+Calculator.evaluate(Num(100))
 // results in 100
 
-evaluate(BinOp("-", Num(10), Num(7))
+Calculator.evaluate(BinOp("-", Num(10), Num(7))
 // results in 10 - 7 = 3
 
-evaluate(BinOp("+", Num(10), UnOp("-", Num(7)))
+Calculator.evaluate(BinOp("+", Num(10), UnOp("-", Num(7)))
 // results in 10 + (-(7)) = 10 + (-7) = 3
 
-evaluate(BinOp("+", Num(3), BinOp("*", Var("this is one"), Num(7))))
+Calculator.evaluate(BinOp("+", Num(3), BinOp("*", Var("this is one"), Num(7))))
 // results in 10, as 3 + 1 * 7 = 3 + 7 = 10
 ```
 
@@ -131,3 +131,4 @@ Looking at `A | B`, the number of possible values is equal to the sum of the car
 The function type `A => B` has an output value for every input value given. This means that for every possible value of the input, we have all the possibilities of the output type. This means (following the previous two composite types) that a function is describable in term of $x$ values of type `B`, meaning that it is equal to `(B, B, ...repeated x times..., B)`.
 
 For the sake of an example, let's imagine that a type `Tri = One | Two | Three` exists. This type obviously has a cardinality of **1 + 1 + 1 = 3** (and as such is equal to `Boolean + Unit` above). The type `Boolean => Tri` is equal to `(Tri, Tri)`, which we know has a cardinality of **3 * 3 = 9**. This is, however, equal to **3^2**, which is exactly the cardinality of `Tri` to the _power_ of the cardinality of `Boolean`. The type `Tri => Boolean` on the other hand is equal to `(Boolean, Boolean, Boolean)`, which means that it has a cardinality of **2 * 2 * 2 = 2^3 = 8**, equivalent to the cardinality of `Boolean` to the _power_ of the cardinality of `Tri`. This is why they're called **power** types.
+

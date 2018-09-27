@@ -1,5 +1,5 @@
 
-package edu.ucsb.cs.cs162.tuts.calc
+package edu.ucsb.cs.cs162.tuts.calculator
 
 // A mathematical expression.
 sealed trait Expr

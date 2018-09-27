@@ -28,9 +28,11 @@ stuck.
 You **must** use only the purely functional subset of Scala. This
 means that you are **not allowed** to use mutations, more explicitly
 you must not use any of:
-    - mutable variables created using `var` keyword,
-    - mutable collections, e.g. anything under `scala.collection.mutable`,
-    - `Array` data type.
+- mutable variables created using `var` keyword,
+
+- mutable collections, e.g. anything under `scala.collection.mutable`,
+
+- `Array` data type.
 
 If you use any mutation, you will automatically fail the assignment.
 

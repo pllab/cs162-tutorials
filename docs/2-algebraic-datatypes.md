@@ -96,7 +96,7 @@ You will need to take care of these three cases, and more, as listed below:
 
 After all the tests that have to do with `simplifyHead` are done, only the `evaluate` tests
 
-8. **Hard** (5 points) Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
+8. Fill in the `evaluate` method in the same class. The `evaluate` method has the following signature:
 ```scala
 object Calculator {
   def evaluate(expr: Expr): Double = ???

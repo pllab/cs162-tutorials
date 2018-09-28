@@ -29,17 +29,17 @@ class SimplifyHeadSpec extends FlatSpec with Matchers {
 
   "An expression" should "be simplified to N if it has the form -(-N)" in {
     def testWith(expr: Expr) = 
-      assert(simplifyHead(UnOp("-", UnOp("-", expr))) == expr)
+      simplifyHead(UnOp("-", UnOp("-", expr))) shouldBe expr
   
     fixture.foreach { testWith(_) }
   }
 
   it should "be simplified to X if it has the form 0 + X or X + 0" in {
     def testLeftWith(expr: Expr) =
-      assert(simplifyHead(BinOp("+", Num(0), expr)) == expr)
+      simplifyHead(BinOp("+", Num(0), expr)) shouldBe expr
 
     def testRightWith(expr: Expr) =
-      assert(simplifyHead(BinOp("+", expr, Num(0))) == expr)
+      simplifyHead(BinOp("+", expr, Num(0))) shouldBe expr
 
     fixture.foreach { expr =>
       testLeftWith(expr)
@@ -49,10 +49,10 @@ class SimplifyHeadSpec extends FlatSpec with Matchers {
 
   it should "be simplified to X if it has the form 1 * X or X * 1" in {
     def testLeftWith(expr: Expr) =
-      assert(simplifyHead(BinOp("*", Num(1), expr)) == expr)
+      simplifyHead(BinOp("*", Num(1), expr)) shouldBe expr
 
     def testRightWith(expr: Expr) =
-      assert(simplifyHead(BinOp("*", expr, Num(1))) == expr)
+      simplifyHead(BinOp("*", expr, Num(1))) shouldBe expr
 
     fixture.foreach { expr =>
       testLeftWith(expr)
@@ -62,10 +62,10 @@ class SimplifyHeadSpec extends FlatSpec with Matchers {
 
   it should "be simplified to 0 if it has the form 0 * X or X * 0" in {
     def testLeftWith(expr: Expr) =
-      assert(simplifyHead(BinOp("*", Num(0), expr)) == Num(0))
+      simplifyHead(BinOp("*", Num(0), expr)) shouldBe Num(0)
 
     def testRightWith(expr: Expr) =
-      assert(simplifyHead(BinOp("*", expr, Num(0))) == Num(0))
+      simplifyHead(BinOp("*", expr, Num(0))) shouldBe Num(0)
 
     fixture.foreach { expr =>
       testLeftWith(expr)
@@ -75,7 +75,7 @@ class SimplifyHeadSpec extends FlatSpec with Matchers {
 
   it should "be simplified to 0 if it has the form X - X" in {
     def testWith(expr: Expr) =
-      assert(simplifyHead(BinOp("-", expr, expr)) == Num(0))
+      simplifyHead(BinOp("-", expr, expr)) shouldBe Num(0)
 
     fixture.foreach { testWith(_) }
   }
@@ -107,19 +107,19 @@ class EvaluateSpec extends FlatSpec with Matchers {
 
   "A number" should "evaluate to its value" in {
     fixture.numbers.foreach { value =>
-      assert(evaluate(Num(value)) == value)
+      evaluate(Num(value)) shouldBe value
     }
   }
 
   "A variable" should "evaluate to 1" in {
     fixture.variables.foreach { text =>
-      assert(evaluate(Var(text)) == 1)
+      evaluate(Var(text)) shouldBe 1
     }
   }
 
   "A unary operation" should "evaluate to 1 if the operator isn't '-'" in {
     def testWithOp(op: String)(e: Expr) =
-      assert(evaluate(UnOp(op, e)) == 1)
+      evaluate(UnOp(op, e)) shouldBe 1
 
     fixture.badOps.foreach { op =>
       val testWith = testWithOp(op) _
@@ -130,17 +130,17 @@ class EvaluateSpec extends FlatSpec with Matchers {
 
   it should "evaluate to a negative of the argument if the operator is '-'" in {
     fixture.numbers.foreach { value =>
-      assert(evaluate(UnOp("-", Num(value))) == -evaluate(Num(value)))
+      evaluate(UnOp("-", Num(value))) shouldBe -evaluate(Num(value))
     }
 
     fixture.expressions.foreach { expr =>
-      assert(evaluate(UnOp("-", expr)) == -evaluate(expr))
+      evaluate(UnOp("-", expr)) shouldBe -evaluate(expr)
     }
   }
 
   "A binary operation" should "evaluate to 1 if the operator isn't '+', '-' or '*'" in {
     def testWithOp(op: String)(e: Expr, f: Expr) =
-      assert(evaluate(BinOp(op, e, f)) == 1)
+      evaluate(BinOp(op, e, f)) shouldBe 1
 
     fixture.badOps.foreach { op =>
       val testWith = testWithOp(op) _
@@ -150,33 +150,33 @@ class EvaluateSpec extends FlatSpec with Matchers {
   }
 
   it should "evaluate to a sum of the arguments if the operator is '+'" in {
-    assert(evaluate(BinOp("+", Num(-2), Num(2))) == 0)
-    assert(evaluate(BinOp("+", Num(2), Num(3))) == 5)
-    assert(evaluate(BinOp("+", Num(-1), Num(-1))) == -2)
-    assert(evaluate(BinOp("+", BinOp("+", Num(2), Num(3)), Num(5))) == 10)
+    evaluate(BinOp("+", Num(-2), Num(2))) shouldBe 0
+    evaluate(BinOp("+", Num(2), Num(3))) shouldBe 5
+    evaluate(BinOp("+", Num(-1), Num(-1))) shouldBe -2
+    evaluate(BinOp("+", BinOp("+", Num(2), Num(3)), Num(5))) shouldBe 10
   }
 
   it should "evaluate to a difference of the arguments if the operator is '-'" in {
-    assert(evaluate(BinOp("-", Num(-2), Num(2))) == -4)
-    assert(evaluate(BinOp("-", Num(2), Num(3))) == -1)
-    assert(evaluate(BinOp("-", Num(-1), Num(-1))) == 0)
-    assert(evaluate(BinOp("-", BinOp("-", Num(2), Num(3)), Num(5))) == -6)
+    evaluate(BinOp("-", Num(-2), Num(2))) shouldBe -4
+    evaluate(BinOp("-", Num(2), Num(3))) shouldBe -1
+    evaluate(BinOp("-", Num(-1), Num(-1))) shouldBe 0
+    evaluate(BinOp("-", BinOp("-", Num(2), Num(3)), Num(5))) shouldBe -6
   }
 
   it should "evaluate to a product of the arguments if the operator is '*'" in {
-    assert(evaluate(BinOp("*", Num(-2), Num(2))) == -4)
-    assert(evaluate(BinOp("*", Num(2), Num(3))) == 6)
-    assert(evaluate(BinOp("*", Num(-1), Num(-1))) == 1)
-    assert(evaluate(BinOp("*", BinOp("*", Num(2), Num(3)), Num(5))) == 30)
+    evaluate(BinOp("*", Num(-2), Num(2))) shouldBe -4
+    evaluate(BinOp("*", Num(2), Num(3))) shouldBe 6
+    evaluate(BinOp("*", Num(-1), Num(-1))) shouldBe 1
+    evaluate(BinOp("*", BinOp("*", Num(2), Num(3)), Num(5))) shouldBe 30
   }
 
   it should "treat Var(DUP) as a duplicate of the other argument" in {
-    assert(evaluate(BinOp("+", Var("DUP"), Num(2))) == 4)
-    assert(evaluate(BinOp("*", Var("DUP"), Num(10))) == 100)
-    assert(evaluate(BinOp("-", Var("DUP"), Num(-1))) == 0)
-    assert(evaluate(BinOp("+", Num(2), Var("DUP"))) == 4)
-    assert(evaluate(BinOp("*", Num(10), Var("DUP"))) == 100)
-    assert(evaluate(BinOp("-", Num(-1), Var("DUP"))) == 0)
+    evaluate(BinOp("+", Var("DUP"), Num(2))) shouldBe 4
+    evaluate(BinOp("*", Var("DUP"), Num(10))) shouldBe 100
+    evaluate(BinOp("-", Var("DUP"), Num(-1))) shouldBe 0
+    evaluate(BinOp("+", Num(2), Var("DUP"))) shouldBe 4
+    evaluate(BinOp("*", Num(10), Var("DUP"))) shouldBe 100
+    evaluate(BinOp("-", Num(-1), Var("DUP"))) shouldBe 0
   }
 }
 

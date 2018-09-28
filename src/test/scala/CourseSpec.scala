@@ -24,30 +24,30 @@ class CourseSpec extends FlatSpec with Matchers {
   //---------------------------------------------------
 
   "A course" should "tell us what its name is" in {
-    assert(new Course("ANTH", 4).name == "ANTH4")
-    assert(new Course("ANTH", 8).name == "ANTH8")
-    assert(new Course("ANTH", 64).name == "ANTH64")
-    assert(new Course("ANTH", 101).name == "ANTH101")
-    assert(new Course("ANTH", 160).name == "ANTH160")
-    assert(new Course("ANTH", 162).name == "ANTH162")
+    new Course("ANTH", 4).name shouldBe "ANTH4"
+    new Course("ANTH", 8).name shouldBe "ANTH8"
+    new Course("ANTH", 64).name shouldBe "ANTH64"
+    new Course("ANTH", 101).name shouldBe "ANTH101"
+    new Course("ANTH", 160).name shouldBe "ANTH160"
+    new Course("ANTH", 162).name shouldBe "ANTH162"
 
-    assert(new Course("ART", 4).name == "ART4")
-    assert(new Course("ART", 8).name == "ART8")
-    assert(new Course("ART", 64).name == "ART64")
-    assert(new Course("ART", 101).name == "ART101")
-    assert(new Course("ART", 160).name == "ART160")
-    assert(new Course("ART", 162).name == "ART162")
+    new Course("ART", 4).name shouldBe "ART4"
+    new Course("ART", 8).name shouldBe "ART8"
+    new Course("ART", 64).name shouldBe "ART64"
+    new Course("ART", 101).name shouldBe "ART101"
+    new Course("ART", 160).name shouldBe "ART160"
+    new Course("ART", 162).name shouldBe "ART162"
 
-    assert(new Course("CMPSC", 4).name == "CMPSC4")
-    assert(new Course("CMPSC", 8).name == "CMPSC8")
-    assert(new Course("CMPSC", 64).name == "CMPSC64")
-    assert(new Course("CMPSC", 101).name == "CMPSC101")
-    assert(new Course("CMPSC", 160).name == "CMPSC160")
-    assert(new Course("CMPSC", 162).name == "CMPSC162")
+    new Course("CMPSC", 4).name shouldBe "CMPSC4"
+    new Course("CMPSC", 8).name shouldBe "CMPSC8"
+    new Course("CMPSC", 64).name shouldBe "CMPSC64"
+    new Course("CMPSC", 101).name shouldBe "CMPSC101"
+    new Course("CMPSC", 160).name shouldBe "CMPSC160"
+    new Course("CMPSC", 162).name shouldBe "CMPSC162"
 
     // These next three lines are the same as 18 lines the above:
     fixture.subjectNumberPairs.foreach { case (name, number) =>
-      assert(new Course(name, number).name == s"${name}${number}")
+      new Course(name, number).name shouldBe s"${name}${number}"
     }
     // We use the `fixture` object from above, this is where we keep useful things
     //  like some names and numbers that can be used in multiple tests.
@@ -78,40 +78,40 @@ class CourseSpec extends FlatSpec with Matchers {
   it should "be a lower division course if the number is between 1 and 99" in {
     (1 to 99).foreach { number =>
       val introduction = new Course("NVM", number)
-      assert(introduction.isLowerDivisionCourse)
-      assert(!introduction.isUpperDivisionCourse)
-      assert(!introduction.isGradDivisionCourse)
-      assert(!introduction.isSeminar)
+      introduction shouldBe 'isLowerDivisionCourse
+      introduction should not be 'isUpperDivisionCourse
+      introduction should not be 'isGradDivisionCourse
+      introduction should not be 'isSeminar
     }
   }
 
   it should "be an upper division course if the number is between 100 and 200" in {
     (100 to 199).foreach { number =>
       val introduction = new Course("NVM", number)
-      assert(!introduction.isLowerDivisionCourse)
-      assert(introduction.isUpperDivisionCourse)
-      assert(!introduction.isGradDivisionCourse)
-      assert(!introduction.isSeminar)
+      introduction should not be 'isLowerDivisionCourse
+      introduction shouldBe 'isUpperDivisionCourse
+      introduction should not be 'isGradDivisionCourse
+      introduction should not be 'isSeminar
     }
   }
 
   it should "be a grad division course if the number is between 200 and 500" in {
     (200 to 299).foreach { number =>
       val introduction = new Course("NVM", number)
-      assert(!introduction.isLowerDivisionCourse)
-      assert(!introduction.isUpperDivisionCourse)
-      assert(introduction.isGradDivisionCourse)
-      assert(!introduction.isSeminar)
+      introduction should not be 'isLowerDivisionCourse
+      introduction should not be 'isUpperDivisionCourse
+      introduction shouldBe 'isGradDivisionCourse
+      introduction should not be 'isSeminar
     }
   }
 
   it should "be a seminar if the number is between 500 and 599" in {
     (500 to 599).foreach { number =>
       val introduction = new Course("NVM", number)
-      assert(!introduction.isLowerDivisionCourse)
-      assert(!introduction.isUpperDivisionCourse)
-      assert(!introduction.isGradDivisionCourse)
-      assert(introduction.isSeminar)
+      introduction should not be 'isLowerDivisionCourse
+      introduction should not be 'isUpperDivisionCourse
+      introduction should not be 'isGradDivisionCourse
+      introduction shouldBe 'isSeminar
     }
   }  
 }

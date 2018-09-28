@@ -14,10 +14,10 @@ class ListProblemsSpec extends FlatSpec with Matchers {
   //---------------------------------------------------
 
   "ListProblems.sumOdd" should "filter out all the odd numbers and then sum those" in {
-    assert(ListProblems.sumOdd(List(1, 1, 1, 1)) == 4)
-    assert(ListProblems.sumOdd(List(1, 2, 3, 4)) == 4)
-    assert(ListProblems.sumOdd(List(2, 4)) == 0)
-    assert(ListProblems.sumOdd(List()) == 0)
+    ListProblems.sumOdd(List(1, 1, 1, 1)) shouldBe 4
+    ListProblems.sumOdd(List(1, 2, 3, 4)) shouldBe 4
+    ListProblems.sumOdd(List(2, 4)) shouldBe 0
+    ListProblems.sumOdd(List()) shouldBe 0
   }
 
   "ListProblems.sumPairs" should "throw an illegal argument exception if the lists aren't of the same length" in {
@@ -28,17 +28,17 @@ class ListProblemsSpec extends FlatSpec with Matchers {
   }
 
   it should "sum two lists pairwise" in {
-    assert(ListProblems.sumPairs(List(2), List(100)) == List(102))
-    assert(ListProblems.sumPairs(List(1), List(1)) == List(2))
-    assert(ListProblems.sumPairs(List(-1, -2, -3), List(1, 2, 3)) == List(0, 0, 0))
-    assert(ListProblems.sumPairs(List(0, 0, 0), List(1, 1, 1)) == List(1, 1, 1))
+    ListProblems.sumPairs(List(2), List(100)) shouldBe List(102)
+    ListProblems.sumPairs(List(1), List(1)) shouldBe List(2)
+    ListProblems.sumPairs(List(-1, -2, -3), List(1, 2, 3)) shouldBe List(0, 0, 0)
+    ListProblems.sumPairs(List(0, 0, 0), List(1, 1, 1)) shouldBe List(1, 1, 1)
   }
 
   "ListProblems.safePenultimate" should "return the penultimate element if there is one, or none if not" in {
-    assert(ListProblems.safePenultimate(List()) == None)
-    assert(ListProblems.safePenultimate(List(1)) == None)
-    assert(ListProblems.safePenultimate(List(1, 2)) == Some(1))    
-    assert(ListProblems.safePenultimate(List(1, 2, 3)) == Some(2))
-    assert(ListProblems.safePenultimate(List(1, 2, 3, 4)) == Some(3))
+    ListProblems.safePenultimate(List()) shouldBe None
+    ListProblems.safePenultimate(List(1)) shouldBe None
+    ListProblems.safePenultimate(List(1, 2)) shouldBe Some(1)
+    ListProblems.safePenultimate(List(1, 2, 3)) shouldBe Some(2)
+    ListProblems.safePenultimate(List(1, 2, 3, 4)) shouldBe Some(3)
   }
 }

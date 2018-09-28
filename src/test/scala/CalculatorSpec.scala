@@ -60,7 +60,7 @@ class SimplifyHeadSpec extends FlatSpec with Matchers {
     }
   }
 
-  it should "be simplified to X if it has the form 0 * X or X * 0" in {
+  it should "be simplified to 0 if it has the form 0 * X or X * 0" in {
     def testLeftWith(expr: Expr) =
       assert(simplifyHead(BinOp("*", Num(0), expr)) == Num(0))
 
